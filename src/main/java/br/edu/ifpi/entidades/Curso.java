@@ -8,10 +8,12 @@ public class Curso {
     private StatusCurso status;
     private int cargahoraria;
 
-    public Curso(String nome, int cargahoraria) {
+    public Curso(String nome, StatusCurso status,int cargahoraria) {
 
         this.nome = nome;
+        this.status = status;
         this.cargahoraria = cargahoraria;
+        
 
     }
 
