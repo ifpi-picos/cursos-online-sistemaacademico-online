@@ -11,7 +11,7 @@ public class Conexacao {
 
     public static void main(String[] args) {
         try {
-            Connection conexacao = DriverManager.getConnection("jdbc:postgresql://localhost:5432/sistemaAcademicoBD", "postgres", "mambee");
+            Connection conexacao = DriverManager.getConnection("jdbc:postgresql://localhost:5432/sistemaacademico", "postgres", "adm05");
             if (conexacao != null){
                 System.out.println("Banco de dados conectado");
                 Statement stm = conexacao.createStatement();
@@ -25,11 +25,11 @@ public class Conexacao {
         }
     }
     static void consultaDados(Statement stm){
-        String sql = "select id, nome from curso";
+        String sql = "select ID, NOME from cursos";
         try{ 
         ResultSet result =  stm.executeQuery(sql);
         while (result.next()){
-            System.out.println("id" + result.getInt("id")+ " Nome: " + result.getString("nome"));
+            System.out.println("id" + result.getInt("ID")+ " Nome: " + result.getString("NOME"));
         }
         } catch(SQLException e){
             e.printStackTrace();
