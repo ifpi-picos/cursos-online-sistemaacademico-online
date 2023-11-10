@@ -1,3 +1,4 @@
+
 package br.edu.ifpi;
 
 import br.edu.ifpi.entidades.Curso;
