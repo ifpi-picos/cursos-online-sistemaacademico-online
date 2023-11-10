@@ -10,6 +10,6 @@ import br.edu.ifpi.enums.StatusCurso;
 public class App {
     public static void main(String[] args) {
         System.out.println("Sistema de cursos online!");
-        Curso ads = new Curso("Análise e Desenvolvimento de Sistemas", StatusCurso.ABERTO, 1200);
+    //    Curso ads = new Curso("Análise e Desenvolvimento de Sistemas", StatusCurso. ABERTO, 1200);
      }
 }
