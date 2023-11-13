@@ -16,6 +16,7 @@ public class Conexacao {
                 System.out.println("Banco de dados conectado");
                 Statement stm = conexacao.createStatement();
                 consultaDados(stm);
+                
             }else{
                 System.out.println("Falha na conexação");
             }
@@ -34,5 +35,8 @@ public class Conexacao {
         } catch(SQLException e){
             e.printStackTrace();
         }
+    }
+    public static Connection getConexao() {
+        return null;
     }
 }

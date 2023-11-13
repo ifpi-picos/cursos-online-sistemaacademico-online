@@ -16,7 +16,7 @@ public class ProfessorDao implements Dao<Professor> {
 
     @Override
     public int cadastrar(Professor professor) {
-        String SQL_INSERT = "INSERT INTO PROFESSOR (NOME, EMAIL) VALUES(?,?)";
+        String SQL_INSERT = "INSERT INTO PROFESSORES (NOME, EMAIL) VALUES(?,?)";
 
         try {
             PreparedStatement preparedStatement = conexao.prepareStatement(SQL_INSERT);
