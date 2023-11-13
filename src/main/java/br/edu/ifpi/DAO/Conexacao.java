@@ -29,7 +29,7 @@ public class Conexacao {
         try{ 
         ResultSet result =  stm.executeQuery(sql);
         while (result.next()){
-            System.out.println("id" + result.getInt("ID")+ " Nome: " + result.getString("NOME"));
+            System.out.println("id " + result.getInt("ID")+ " Nome: " + result.getString("NOME"));
         }
         } catch(SQLException e){
             e.printStackTrace();
