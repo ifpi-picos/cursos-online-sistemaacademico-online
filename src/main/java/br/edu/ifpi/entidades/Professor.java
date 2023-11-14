@@ -4,19 +4,16 @@ public class Professor {
     private String nome;
     private int id;
     private String email;
-    private Curso curso;
 
-    public Professor(String nome, String email, Curso curso) {
+    public Professor(String nome, String email) {
         this.nome = nome;
         this.email = email;
-        this.curso = curso;
     }
 
-    public Professor(String nome, int id, String email, Curso curso) {
+    public Professor(String nome, int id, String email) {
         this.nome = nome;
         this.id = id;
         this.email = email;
-        this.curso = curso;
     }
 
     public String getNome() {
@@ -31,12 +28,6 @@ public class Professor {
         return email;
     }
 
-    public Curso getCurso() {
-        return curso;
-    }
 
-    public void setCurso(Curso curso) {
-        this.curso = curso;
-    }
 
 }

@@ -23,9 +23,8 @@ public class App {
         ProfessorDao ProfessorDao = new ProfessorDao(conexao);
          String nome = JOptionPane.showInputDialog("Nome: ");
          String email = JOptionPane.showInputDialog("Email: ");
-         String id = JOptionPane.showInputDialog("Curso: ");
 
-         Professor novoProfessor = new Professor(nome, null, ads);
+         Professor novoProfessor = new Professor(nome, email);
 
         int retorno = ProfessorDao.cadastrar(novoProfessor);
 
