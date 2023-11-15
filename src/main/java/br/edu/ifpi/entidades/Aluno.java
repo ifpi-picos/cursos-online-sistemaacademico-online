@@ -13,21 +13,19 @@ public class Aluno {
         this.curso = curso;
     }
 
-    public Aluno(String nome, int id, String email, Curso curso) {
-        this.nome = nome;
+    public Aluno(int id, String nome,String email, Curso curso) {
         this.id = id;
+        this.nome = nome;
         this.email = email;
         this.curso = curso;
-    }
-
-    public String getNome() {
-        return nome;
     }
 
     public long getId() {
         return id;
     }
-
+    public String getNome() {
+        return nome;
+    }
     public String getEmail() {
         return email;
     }
