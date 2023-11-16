@@ -42,12 +42,27 @@ public class ProfessorDao implements Dao<Professor> {
         return null;
     }
     @Override
-    public int alterar(Professor entidade){
-        throw new UnsupportedOperationException("Unimplemented method 'alterar'");
+    public int alterar(Professor professor){
+        try {
+            String modificacao = "UPDATE professor SET NOME=?, EMAIL=? WHERE ID=?" + professor.getId();
+            PreparedStatement stmt = conexao.prepareStatement(modificacao);
+            stmt.setString(1,professor.getNome());
+            stmt.setString(2,professor.getEmail());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
     @Override
-    public int remover(Professor entidade){
-        throw new UnsupportedOperationException("Unimplemented method 'remove' ");
+    public int remover(Professor professor){
+        try {
+            String remocacao = "DELETE FROM PROFESSOR WHERE ID="+ professor.getId();
+            PreparedStatement stmt = conexao.prepareStatement(remocacao);
+            stmt.setInt(1, (int) professor.getId());
+            stmt.executeUpdate();
+        } catch (Exception e) {
+           e.printStackTrace();
+        }
+        return 0;
     }
-
 }
