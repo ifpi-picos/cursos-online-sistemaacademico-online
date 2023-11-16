@@ -37,7 +37,7 @@ public class AlunoDao implements Dao<Aluno> {
     }
 
     @Override
-    public int alterar(Aluno entidade) {
+    public int alterar(Aluno aluno) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'alterar'");
     }
