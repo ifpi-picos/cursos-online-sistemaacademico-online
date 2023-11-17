@@ -2,8 +2,8 @@ package br.edu.ifpi.entidades;
 
 public class Aluno {
 
-    private String nome;
     private int id;
+    private String nome;
     private String email;
     private Curso curso;
 

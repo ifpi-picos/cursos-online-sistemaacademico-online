@@ -19,18 +19,18 @@ public class App {
     public static void main(String[] args) {
         System.out.println("Sistema de cursos online!");
         Connection conexao = Conexacao.getConexao();
-        Curso ads = new Curso(1,"Análise e Desenvolvimento de Sistemas", StatusCurso. ABERTO, 1200);
+        Curso ads = new Curso(1,"Análise e Desenvolvimento de Sistemas", StatusCurso. ABERTO, 1200, 1);
         ProfessorDao ProfessorDao = new ProfessorDao(conexao);
          String nome = JOptionPane.showInputDialog("Nome: ");
          String email = JOptionPane.showInputDialog("Email: ");
 
-         Professor novoProfessor = new Professor(nome, email);
+        //  Professor novoProfessor = new Professor(nome, email);
 
-        int retorno = ProfessorDao.cadastrar(novoProfessor);
+        // int retorno = ProfessorDao.cadastrar(novoProfessor);
 
-        String mensagem = retorno > 0 ? "Sucesso!" : "Falhou!";
+        // String mensagem = retorno > 0 ? "Sucesso!" : "Falhou!";
 
-        JOptionPane.showMessageDialog(null, mensagem, "Retorno", JOptionPane.INFORMATION_MESSAGE);
+        // JOptionPane.showMessageDialog(null, mensagem, "Retorno", JOptionPane.INFORMATION_MESSAGE);
 
       
      }

@@ -13,4 +13,5 @@ CREATE TABLE curso(
     PROF_ID INTEGER NOT NULL,
     PRIMARY KEY (ID), 
     FOREIGN KEY (PROF_ID) REFERENCES professor(id)
+    
 );
