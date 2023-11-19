@@ -7,8 +7,13 @@ import java.util.List;
 
 import br.edu.ifpi.entidades.Curso;
 
-class CursoDao implements Dao<Curso>{
+public class CursoDao implements Dao<Curso>{
     private Connection conexao;
+    
+    public CursoDao(Connection conexao) {
+        this.conexao = conexao;
+    }
+
     @Override
     public int cadastrar(Curso curso) {
           String SQL_INSERT = "INSERT INTO Curso (NOME, STATUS, CARGAHORARIA) VALUES(?,?,?)";

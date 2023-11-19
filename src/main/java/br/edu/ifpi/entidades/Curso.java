@@ -3,7 +3,6 @@ import br.edu.ifpi.enums.StatusCurso;
 
 public class Curso {
     private int id;
-    
     private String nome;
     private StatusCurso status;
     private int cargahoraria;

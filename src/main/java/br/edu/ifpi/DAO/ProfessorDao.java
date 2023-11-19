@@ -55,8 +55,9 @@ public class ProfessorDao implements Dao<Professor> {
     }
     @Override
     public int remover(Professor professor){
+         String remocacao = "DELETE FROM PROFESSOR (NOME,EMAIL)";
         try {
-            String remocacao = "DELETE FROM PROFESSOR WHERE ID="+ professor.getId();
+           
             PreparedStatement stmt = conexao.prepareStatement(remocacao);
             stmt.setInt(1, (int) professor.getId());
             stmt.executeUpdate();
