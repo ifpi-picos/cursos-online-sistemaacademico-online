@@ -20,12 +20,17 @@ public class App {
     public static void main(String[] args) {
         System.out.println("Sistema de cursos online!");
         Connection conexao = Conexacao.getConexao();
+<<<<<<< HEAD
         Curso ads = new Curso(1, "Análise e Desenvolvimento de Sistemas", StatusCurso.ABERTO, 1200);
         Curso fisica = new Curso(2, "Fisica", StatusCurso.FECHADO, 2200);
+=======
+        Curso ads = new Curso(1,"Análise e Desenvolvimento de Sistemas", StatusCurso. ABERTO, 1200, 1);
+>>>>>>> 8ec78c0e9b69fc721d9d5a13685f34cce3feb648
         ProfessorDao ProfessorDao = new ProfessorDao(conexao);
         // String nome = JOptionPane.showInputDialog("Nome: ");
         // String email = JOptionPane.showInputDialog("Email: ");
 
+<<<<<<< HEAD
         Professor novoProfessor = new Professor("Emilly", "emilly@prof.com");
         Professor novoProfessor1 = new Professor("Kedna", "kedna@prof.com");
         Professor novoProfessor2 = new Professor("Emileny", "emileny@prof.com");
@@ -42,6 +47,15 @@ public class App {
                 
                String msm3 = deleta > 0 ? "deu certo" : "nao deu";
          JOptionPane.showMessageDialog(null, msm3, "Retorno", JOptionPane.INFORMATION_MESSAGE);
+=======
+        //  Professor novoProfessor = new Professor(nome, email);
+
+        // int retorno = ProfessorDao.cadastrar(novoProfessor);
+
+        // String mensagem = retorno > 0 ? "Sucesso!" : "Falhou!";
+
+        // JOptionPane.showMessageDialog(null, mensagem, "Retorno", JOptionPane.INFORMATION_MESSAGE);
+>>>>>>> 8ec78c0e9b69fc721d9d5a13685f34cce3feb648
 
         // JOptionPane.showMessageDialog(null, mensagem, "Retorno",
         // JOptionPane.INFORMATION_MESSAGE);

@@ -19,10 +19,10 @@ public class Professor {
     public String getNome() {
         return nome;
     }
-
-    public long getId() {
+    public int getId() {
         return id;
     }
+
 
     public String getEmail() {
         return email;

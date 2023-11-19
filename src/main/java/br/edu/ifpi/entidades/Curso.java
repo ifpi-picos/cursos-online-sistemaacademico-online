@@ -6,14 +6,13 @@ public class Curso {
     private String nome;
     private StatusCurso status;
     private int cargahoraria;
+    private int prof_id;
 
-    public Curso(int id, String nome, StatusCurso status, int cargahoraria) {
-        
+    public Curso(int id, String nome, StatusCurso status, int cargahoraria, int prof_id) {
         this.nome = nome;
         this.status = status;
         this.cargahoraria = cargahoraria;
-        
-        
+        this.prof_id = prof_id;
     }
     
     public Curso() {
@@ -33,5 +32,8 @@ public class Curso {
 
     public int getCargahoraria() {
         return cargahoraria;
+    }
+    public int getProf_id(){
+        return prof_id;
     }
 }
