@@ -2,6 +2,10 @@
 package br.edu.ifpi;
 
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
@@ -24,20 +28,48 @@ public class App {
         ProfessorDao ProfessorDao = new ProfessorDao(conexao);
         
 
-        Professor novoProfessor = new Professor("Cakelin", "Cat@prof.com");
-        Professor novoProfessor1 = new Professor("Valeria", "valeria@prof.com");
+        Professor novoProfessor1 = new Professor("zé", "789@prof.com");
 
-        int retorno = ProfessorDao.cadastrar(novoProfessor);
         int retorno1 = ProfessorDao.cadastrar(novoProfessor1);
 
-        String mensagem = retorno > 0 ? "Sucesso!" : "Falhou!";
+        String mensagem = retorno1 > 0 ? "Sucesso!" : "Falhou!";
         JOptionPane.showMessageDialog(null, mensagem, "Retorno", JOptionPane.INFORMATION_MESSAGE);
         
+                        
+
+//          // Consultar todos os professores
+//             List<Professor> professores = ProfessorDao.consultarTodos();
+
+//             // Exibir os resultados
+//             System.out.println("Lista de Professores:");
+//             for (Professor professor : professores) {
+//                 System.out.println("ID: " + professor.getId() + ", Nome: " + professor.getNome() + ", Email: " + professor.getEmail());
+//             }
+//         } catch (SQLException e) {
+//             e.printStackTrace();
+//             System.out.println("Erro ao conectar ao banco de dados: " + e.getMessage());
+//         }
+//     }
+// }
+        List<Professor> profs = ProfessorDao.consultarTodos();
         
-        int msg = ProfessorDao.remover(novoProfessor);
+        int i = 0;
+        while(i <= profs.size()) {
+            System.out.println("Nome: " + profs.get(i).getNome());
+            i++;
+        }
+        Scanner scan = new Scanner(System.in);
+        int opcao = scan.nextInt();
+
+        Professor profRemover = profs.get(opcao-1);
+
+        int msg = ProfessorDao.remover(profRemover);
+
         String mnsg = msg > 0 ? "Sucesso!" : "Falhou!";
         JOptionPane.showMessageDialog(null, mnsg, "Retorno", JOptionPane.INFORMATION_MESSAGE);
 
        
+    
+
     }
 }
