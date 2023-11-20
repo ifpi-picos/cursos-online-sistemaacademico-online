@@ -66,7 +66,8 @@ public class AlunoDao implements Dao<Aluno> {
     @Override
     public int remover(Aluno aluno) {
         try {
-            String sqlDelete = "DELETE FROM alunos WHERE ID=?" + aluno.getId();
+            String sqlDelete = "DELETE FROM alunos WHERE ID = ?" + aluno.getId();
+            
             PreparedStatement stmt = conexao.prepareStatement(sqlDelete);
             stmt.setInt(1, (int) aluno.getId());
             stmt.executeUpdate();

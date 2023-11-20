@@ -58,20 +58,23 @@ public class ProfessorDao implements Dao<Professor> {
     @Override
     public int remover(Professor professor){
         
+        String remocao="DELETE FROM PROFESSOR WHERE ID = ?" ;
         try {
-            
-
-        PreparedStatement stmt = conexao.prepareStatement("DELETE FROM PROFESSOR WHERE ID = ?");
+        PreparedStatement stmt = conexao.prepareStatement(remocao);
         stmt.setInt(1, professor.getId());
-           
-        stmt.executeUpdate();
-
-          JOptionPane.showMessageDialog(null, " atualizado com sucesso!");
-        } catch (Exception e) {
-           e.printStackTrace();
+        int linhasAfetadas = stmt.executeUpdate();
+        
+        if (linhasAfetadas > 0) {
+            JOptionPane.showMessageDialog(null, "Professor removido com sucesso!");
+        } else {
+            JOptionPane.showMessageDialog(null, "Nenhum professor foi removido. Verifique o ID.");
         }
-        return 0;
+    } catch (SQLException e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Erro ao tentar remover o professor: " + e.getMessage());
     }
+    return 0;
+}
 
     @Override
     public int alterar(Professor entidade) {
@@ -79,7 +82,7 @@ public class ProfessorDao implements Dao<Professor> {
         throw new UnsupportedOperationException("Unimplemented method 'alterar'");
     }
 
-    public int remover(int i) {
-        return 0;
-    }
+    // public int remover(int i) {
+    //     return 0;
+    // }
 }

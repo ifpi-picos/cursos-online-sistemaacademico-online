@@ -15,3 +15,12 @@ CREATE TABLE curso(
     FOREIGN KEY (PROF_ID) REFERENCES professor(id)
     
 );
+
+CREATE TABLE turma(
+    id_curso int,
+    id_aluno int,
+    notas float(25),
+    situacao status,
+    FOREIGN KEY (id_curso) REFERENCES curso(id),
+    FOREIGN key (id_aluno) REFERENCES aluno(id)
+)
