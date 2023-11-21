@@ -1,9 +1,14 @@
 package br.edu.ifpi.DAO;
 
+import java.io.ObjectInputFilter.Status;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JOptionPane;
 
 import br.edu.ifpi.entidades.Curso;
 
@@ -34,14 +39,31 @@ public class CursoDao implements Dao<Curso>{
 
     @Override
     public List<Curso> consultarTodos() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'consultarTodos'");
+        List<Curso> cursos = new ArrayList<>();
+        String sqlSelect = "SELECT * FROM Curso";
+        try {
+            PreparedStatement stmt = conexao.prepareStatement(sqlSelect);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()){
+                Curso curso = new Curso();
+                curso.setId(rs.getInt("CURSO_ID"));
+                curso.setNome(rs.getString("NOME"));
+                curso.setStatus(Enum.valueOf(Status.class, rs.getString("STATUS")));
+                curso.setCargahoraria(rs.getInt("CARGAHORARIA"));
+                curso.setProf_id(rs.getInt("PROF_ID"));
+                cursos.add(curso);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return cursos;
     }
 
     @Override
     public int alterar(Curso curso) {
+        String sqlUpdate = "UPDATE cursos SET NOME=?, STATUS=?, CARGAHORARIA=? PROF_ID=? WHERE ID=?" + curso.getId();
         try {
-            String sqlUpdate = "UPDATE cursos SET NOME=?, STATUS=?, CARGAHORARIA=? PROF_ID=? WHERE ID=?" + curso.getId();
             PreparedStatement stmt = conexao.prepareStatement(sqlUpdate);
             stmt.setString(1, curso.getNome());
             stmt.setString(2, curso.getStatus().name());
@@ -53,10 +75,33 @@ public class CursoDao implements Dao<Curso>{
         return 0;
     }
 
+    public void visualizarCursos() {
+        String selecaoColuna = "SELECT ID, NOME FROM CURSO";
+        try {
+            PreparedStatement stmt = conexao.prepareStatement(selecaoColuna);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                System.out.println(rs.getInt("ID") + "\t" + rs.getString("NOME"));
+            }
+            rs.close();
+            stmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
-    public int remover(Curso entidade) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'remover'");
+    public int remover(Curso curso) {
+        visualizarCursos();
+        String sqlDelete = "DELETE FROM CURSO WHERE ID = ?";
+        try {
+            PreparedStatement stmt = conexao.prepareStatement(sqlDelete);
+            stmt.setInt(1, curso.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao tentar remover Curso :( " + e.getMessage());
+        }
+        return 0;
     }
     
 }

@@ -1,4 +1,6 @@
 package br.edu.ifpi.entidades;
+import java.io.ObjectInputFilter.Status;
+
 import br.edu.ifpi.enums.StatusCurso;
 
 public class Curso {
@@ -21,19 +23,37 @@ public class Curso {
     public int getId() {
         return id;
     }
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;
+    }
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public StatusCurso getStatus() {
         return status;
     }
+    public void setStatus(StatusCurso status) {
+        this.status = status;
+    }
 
     public int getCargahoraria() {
         return cargahoraria;
     }
+    public void setCargahoraria(int cargahoraria) {
+        this.cargahoraria = cargahoraria;
+    }
     public int getProf_id(){
         return prof_id;
+    }
+    public void setProf_id(int prof_id) {
+        this.prof_id = prof_id;
+    }
+
+    public void setStatus(Status valueOf) {
     }
 }
