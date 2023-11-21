@@ -13,7 +13,7 @@ CREATE TABLE aluno(
     id serial NOT NULL,
     nome varchar (250) NOT NULL,
     email character varying(255) NOT NULL,
-    PRIMARY KEY (ID)
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE curso(
