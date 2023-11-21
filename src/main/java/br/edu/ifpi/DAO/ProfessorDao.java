@@ -20,7 +20,7 @@ public class ProfessorDao implements Dao<Professor> {
 
     @Override
     public int cadastrar(Professor professor) {
-        String SQL_INSERT = "INSERT INTO PROFESSOR (NOME, EMAIL) VALUES(?,?)";
+        String SQL_INSERT = "INSERT INTO professor (nome, email) VALUES(?,?)";
 
         try {
             PreparedStatement preparedStatement = conexao.prepareStatement(SQL_INSERT);
@@ -47,22 +47,22 @@ public class ProfessorDao implements Dao<Professor> {
     
             String consulta = "SELECT * FROM PROFESSOR";
     
-            try {
-                PreparedStatement stmt = conexao.prepareStatement(consulta);
-                ResultSet resultado = stmt.executeQuery();
-    
-                while (resultado.next()) {
-                    int id = resultado.getInt("ID");
-                    String nome = resultado.getString("NOME");
-                    String email = resultado.getString("EMAIL");
-    
-                    Professor professor = new Professor(nome, email);
-                    professores.add(professor);
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-                // Aqui você pode lidar com a exceção de consulta SQL de acordo com suas necessidades
+            try (PreparedStatement statement = conexao.prepareStatement(consulta);
+             ResultSet resultSet = statement.executeQuery()) {
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String nome = resultSet.getString("nome");
+                String email = resultSet.getString("email");
+
+                Professor professor = new Professor(id,nome, email);
+
+                
+                professores.add(professor);
             }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao consultar professores", e);
+        }
     
             return professores;
         }
@@ -82,18 +82,10 @@ public class ProfessorDao implements Dao<Professor> {
     @Override
     public int remover(Professor professor){
         
-        String remocao="DELETE FROM PROFESSOR WHERE id = ?" ;
-        try {
-        PreparedStatement stmt = conexao.prepareStatement(remocao);
+        String remocao="DELETE FROM professsor WHERE id = ?" ;
+        try(PreparedStatement stmt = conexao.prepareStatement(remocao)) {
         stmt.setInt(1, professor.getId());
-        int linhasAfetadas = stmt.executeUpdate();
-
-        if (linhasAfetadas > 0) {
-            JOptionPane.showMessageDialog(null, "Professor removido com sucesso!");
-        } else {
-            JOptionPane.showMessageDialog(null, "Nenhum professor foi removido. Verifique o ID.");
-        }
-        return linhasAfetadas; // Retorna o número de linhas afetadas
+        return stmt.executeUpdate();
     } catch (SQLException e) {
         e.printStackTrace();
         JOptionPane.showMessageDialog(null, "Erro ao tentar remover o professor: " + e.getMessage());

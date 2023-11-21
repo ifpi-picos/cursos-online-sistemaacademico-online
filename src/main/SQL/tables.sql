@@ -1,26 +1,36 @@
+DROP DATABASE sistemaacademico;
+CREATE DATABASE sistemaacademico;
+\c sistemaacademico;
+
+CREATE TABLE professor(
+    id serial NOT NULL,
+    nome varchar (250) NOT NULL,
+    email character varying(255) NOT NULL,
+    PRIMARY KEY (id)
+);
+
 CREATE TABLE aluno(
-    ID serial NOT NULL,
-    NOME varchar (250) NOT NULL,
-    EMAIL character varying(255) NOT NULL,
+    id serial NOT NULL,
+    nome varchar (250) NOT NULL,
+    email character varying(255) NOT NULL,
     PRIMARY KEY (ID)
 );
 
 CREATE TABLE curso(
-    ID serial NOT NULL,
-    NOME varchar (250) NOT NULL,
-    -- STATUS ENUM 
-    CARGAHORARIA INTEGER NOT NULL,
-    PROF_ID INTEGER NOT NULL,
-    PRIMARY KEY (ID), 
-    FOREIGN KEY (PROF_ID) REFERENCES professor(id)
+    id serial NOT NULL,
+    nome varchar (250) NOT NULL,
+    carga_horaria INTEGER NOT NULL,
+    id_professor INTEGER NOT NULL,
+    PRIMARY KEY (id), 
+    FOREIGN KEY (id_professor) REFERENCES professor(id)
     
 );
 
 CREATE TABLE turma(
     id_curso int,
     id_aluno int,
-    notas float(25),
-    situacao status,
+    nota float(25),
+    situacao VARCHAR(255),
     FOREIGN KEY (id_curso) REFERENCES curso(id),
     FOREIGN key (id_aluno) REFERENCES aluno(id)
 )

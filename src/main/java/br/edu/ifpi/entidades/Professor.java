@@ -10,7 +10,7 @@ public class Professor {
         this.email = email;
     }
 
-    public Professor(String nome, int id, String email) {
+    public Professor(int id,String nome, String email) {
         this.nome = nome;
         this.id = id;
         this.email = email;
