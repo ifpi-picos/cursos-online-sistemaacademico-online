@@ -21,7 +21,7 @@ public class CursoDao implements Dao<Curso>{
 
     @Override
     public int cadastrar(Curso curso) {
-          String SQL_INSERT = "INSERT INTO Curso (NOME, STATUS, CARGAHORARIA, PROF_ID) VALUES(?,?,?,?)";
+          String SQL_INSERT = "INSERT INTO curso (nome, status, cargahoraria, prof_id) VALUES(?,?,?,?)";
 
         try{
             PreparedStatement stmt =  conexao.prepareStatement(SQL_INSERT);

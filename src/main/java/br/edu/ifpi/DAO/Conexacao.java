@@ -12,8 +12,8 @@ public class Conexacao {
     public static Connection getConexao() {
         Connection conexacao = null;
         try {
-            conexacao = DriverManager.getConnection("jdbc:postgresql://localhost:5432/sistemaacademico", "postgres",
-                    "adm05");
+            conexacao = DriverManager.getConnection("jdbc:postgresql://db.onhjsbyomiqklysfmhyc.supabase.co:5432/postgres", "postgres",
+                    "emileny emily kedna");
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

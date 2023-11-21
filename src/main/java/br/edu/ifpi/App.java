@@ -26,6 +26,7 @@ public class App {
         Connection conexao = Conexacao.getConexao();
 
         ProfessorDao ProfessorDao = new ProfessorDao(conexao);
+        CursoDao cursoDao = new CursoDao(conexao);
 
         Professor novoProfessor1 = new Professor("zé", "789@prof.com");
         Professor novoProfessor2 = new Professor("João", "joao@prof.com");
@@ -35,7 +36,10 @@ public class App {
         ProfessorDao.cadastrar(novoProfessor2);
         ProfessorDao.cadastrar(novoProfessor3);
 
-        ProfessorDao.consultarTodos();
+        Curso curso = new Curso(1,"Algoritmo", StatusCurso.ABERTO, 100, 1);
+        cursoDao.cadastrar(curso);
+
+        // ProfessorDao.consultarTodos();
 
         // int i = 0;
         // while (i <= profs.size()) {
