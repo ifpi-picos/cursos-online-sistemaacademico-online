@@ -33,4 +33,4 @@ CREATE TABLE turma(
     situacao VARCHAR(255),
     FOREIGN KEY (id_curso) REFERENCES curso(id),
     FOREIGN key (id_aluno) REFERENCES aluno(id)
-)
+);
