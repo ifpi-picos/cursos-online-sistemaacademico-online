@@ -21,14 +21,18 @@ public class CursoDao implements Dao<Curso>{
 
     @Override
     public int cadastrar(Curso curso) {
-          String SQL_INSERT = "INSERT INTO curso (nome, status, cargahoraria, prof_id) VALUES(?,?,?,?)";
+          String SQL_INSERT = "INSERT INTO curso (nome, status, cargahoraria, id_professor) VALUES(?,?,?,?)";
 
         try{
             PreparedStatement stmt =  conexao.prepareStatement(SQL_INSERT);
             stmt.setString(1, curso.getNome());
-            stmt.setString(2, curso.getStatus().name());
             stmt.setInt(3, curso.getCargahoraria());
             stmt.setInt(4, curso.getProf_id());
+            stmt.setString(2, curso.getStatus().name());
+            int row = stmt.executeUpdate();
+
+            System.out.println(row);
+            return row;
         }catch (SQLException e){
             System.err.format("SQL State %s\n%s", e.getSQLState(), e.getMessage());
         }catch (Exception e){
@@ -47,11 +51,11 @@ public class CursoDao implements Dao<Curso>{
 
             while (rs.next()){
                 Curso curso = new Curso();
-                curso.setId(rs.getInt("CURSO_ID"));
-                curso.setNome(rs.getString("NOME"));
-                curso.setStatus(Enum.valueOf(Status.class, rs.getString("STATUS")));
-                curso.setCargahoraria(rs.getInt("CARGAHORARIA"));
-                curso.setProf_id(rs.getInt("PROF_ID"));
+                curso.setId(rs.getInt("id"));
+                curso.setNome(rs.getString("nome"));
+                curso.setStatus(Enum.valueOf(Status.class, rs.getString("status")));
+                curso.setCargahoraria(rs.getInt("cargahoraria"));
+                curso.setProf_id(rs.getInt("id_professor"));
                 cursos.add(curso);
             }
         } catch (Exception e) {
@@ -62,7 +66,7 @@ public class CursoDao implements Dao<Curso>{
 
     @Override
     public int alterar(Curso curso) {
-        String sqlUpdate = "UPDATE cursos SET NOME=?, STATUS=?, CARGAHORARIA=? PROF_ID=? WHERE ID=?" + curso.getId();
+        String sqlUpdate = "UPDATE curso SET nome=?, status=?, cargahoraria=? id_professor=? WHERE ID=?" + curso.getId();
         try {
             PreparedStatement stmt = conexao.prepareStatement(sqlUpdate);
             stmt.setString(1, curso.getNome());

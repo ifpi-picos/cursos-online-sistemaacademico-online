@@ -28,16 +28,17 @@ public class App {
         ProfessorDao ProfessorDao = new ProfessorDao(conexao);
         CursoDao cursoDao = new CursoDao(conexao);
 
-        Professor novoProfessor1 = new Professor("zé", "789@prof.com");
-        Professor novoProfessor2 = new Professor("João", "joao@prof.com");
-        Professor novoProfessor3 = new Professor("Pedro", "pedro@prof.com");
+        // Professor novoProfessor1 = new Professor("zé", "789@prof.com");
+        // Professor novoProfessor2 = new Professor("João", "joao@prof.com");
+        // Professor novoProfessor3 = new Professor("Pedro", "pedro@prof.com");
 
-        ProfessorDao.cadastrar(novoProfessor1);
-        ProfessorDao.cadastrar(novoProfessor2);
-        ProfessorDao.cadastrar(novoProfessor3);
+        // ProfessorDao.cadastrar(novoProfessor1);
+        // ProfessorDao.cadastrar(novoProfessor2);
+        // ProfessorDao.cadastrar(novoProfessor3);
 
-        Curso curso = new Curso(1,"Algoritmo", StatusCurso.ABERTO, 100, 1);
-        cursoDao.cadastrar(curso);
+        // Curso curso = new Curso(1,"Algoritmo", 100, 1, StatusCurso.ABERTO);
+        // cursoDao.cadastrar(curso);
+        cursoDao.consultarTodos();
 
         // ProfessorDao.consultarTodos();
 

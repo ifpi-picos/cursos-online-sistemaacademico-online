@@ -18,6 +18,7 @@ CREATE TABLE aluno(
 
 CREATE TABLE curso(
     id serial NOT NULL,
+    status varchar (250) NOT NULL,
     nome varchar (250) NOT NULL,
     carga_horaria INTEGER NOT NULL,
     id_professor INTEGER NOT NULL,

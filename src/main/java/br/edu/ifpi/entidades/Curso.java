@@ -6,15 +6,15 @@ import br.edu.ifpi.enums.StatusCurso;
 public class Curso {
     private int id;
     private String nome;
+    private int carga_horaria;
+    private int id_professor;
     private StatusCurso status;
-    private int cargahoraria;
-    private int prof_id;
-
-    public Curso(int id, String nome, StatusCurso status, int cargahoraria, int prof_id) {
+    
+    public Curso(int id, String nome,int carga_horaria, int id_professor, StatusCurso status) {
         this.nome = nome;
+        this.carga_horaria = carga_horaria;
+        this.id_professor = id_professor;
         this.status = status;
-        this.cargahoraria = cargahoraria;
-        this.prof_id = prof_id;
     }
     
     public Curso() {
@@ -42,16 +42,16 @@ public class Curso {
     }
 
     public int getCargahoraria() {
-        return cargahoraria;
+        return carga_horaria;
     }
     public void setCargahoraria(int cargahoraria) {
-        this.cargahoraria = cargahoraria;
+        this.carga_horaria = cargahoraria;
     }
     public int getProf_id(){
-        return prof_id;
+        return id_professor;
     }
-    public void setProf_id(int prof_id) {
-        this.prof_id = prof_id;
+    public void setProf_id(int id_professor) {
+        this.id_professor = id_professor;
     }
 
     public void setStatus(Status valueOf) {
