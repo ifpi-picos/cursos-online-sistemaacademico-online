@@ -5,19 +5,19 @@ public class Aluno {
     private int id;
     private String nome;
     private String email;
-    private Curso curso;
+    // private Curso curso;
 
-    public Aluno(String nome, String email, Curso curso) {
+    public Aluno(String nome, String email) {
         this.nome = nome;
         this.email = email;
-        this.curso = curso;
+        // this.curso = curso;
     }
 
-    public Aluno(int id, String nome,String email, Curso curso) {
+    public Aluno(int id, String nome,String email) {
         this.id = id;
         this.nome = nome;
         this.email = email;
-        this.curso = curso;
+        // this.curso = curso;
     }
 
     public long getId() {
@@ -30,11 +30,11 @@ public class Aluno {
         return email;
     }
 
-    public Curso getCurso() {
-        return curso;
-    }
+    // public Curso getCurso() {
+    //     return curso;
+    // }
 
-    public void setCurso(Curso curso) {
-        this.curso = curso;
-    }
+    // public void setCurso(Curso curso) {
+    //     this.curso = curso;
+    // }
 }
