@@ -41,6 +41,7 @@ public class CursoDao implements Dao<Curso>{
         return 0;  
       }
 
+
     @Override
     public List<Curso> consultarTodos() {
         List<Curso> cursos = new ArrayList<>();
@@ -58,6 +59,10 @@ public class CursoDao implements Dao<Curso>{
                 curso.setProf_id(rs.getInt("id_professor"));
                 cursos.add(curso);
             }
+
+            for (Curso c : cursos){
+                System.out.println("id : " + c.getId() + "\t Nome: " + c.getNome() + "\t carga horaria :" + c.getCargahoraria());
+            }
             rs.close();
             stmt.close();
         } catch (Exception e) {
@@ -66,6 +71,23 @@ public class CursoDao implements Dao<Curso>{
         return cursos;
     }
 
+        public void visualizarCursos() {
+            String selecaoColuna = "SELECT ID, NOME, cargahoraria FROM CURSO";
+            try {
+                PreparedStatement stmt = conexao.prepareStatement(selecaoColuna);
+                ResultSet rs = stmt.executeQuery();
+                System.out.println("-----------Cursos-----------");
+                while (rs.next()) {
+                    System.out.println(rs.getInt("ID") + "\t" + rs.getString("NOME"));
+                }             
+                System.out.println("-----------------------------");
+    
+                rs.close();
+                stmt.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     @Override
     public int alterar(Curso curso) {
         String sqlUpdate = "UPDATE curso SET nome=?, status=?, cargahoraria=? id_professor=? WHERE ID=?" + curso.getId();
@@ -82,22 +104,6 @@ public class CursoDao implements Dao<Curso>{
         }
         return 0;
     }
-
-    public void visualizarCursos() {
-        String selecaoColuna = "SELECT ID, NOME, cargahoraria FROM CURSO";
-        try {
-            PreparedStatement stmt = conexao.prepareStatement(selecaoColuna);
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                System.out.println(rs.getInt("ID") + "\t" + rs.getString("NOME") + " -" + rs.getInt("cargahoraria"));
-            }
-            rs.close();
-            stmt.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     @Override
     public int remover(Curso curso) {
         String sqlDelete = "DELETE FROM CURSO WHERE ID = ?";
@@ -106,7 +112,7 @@ public class CursoDao implements Dao<Curso>{
             PreparedStatement stmt = conexao.prepareStatement(sqlDelete);
             stmt.setInt(1, curso.getId());
             stmt.executeUpdate();
-            System.out.println(curso.getId() + " - " + curso.getNome() + " curso removido");
+            System.out.println(curso.getId()  + " curso removido");
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Erro ao tentar remover Curso :( " + e.getMessage());

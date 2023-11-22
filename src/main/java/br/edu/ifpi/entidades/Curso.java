@@ -20,7 +20,7 @@ public class Curso {
     public Curso() {
     }
     public int getId() {
-        return id = 2;
+        return id;
     }
 
     public void setId(int id) {
