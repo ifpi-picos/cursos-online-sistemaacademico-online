@@ -36,11 +36,24 @@ public class App {
         // ProfessorDao.cadastrar(novoProfessor2);
         // ProfessorDao.cadastrar(novoProfessor3);
 
-        // Curso curso = new Curso(1,"Algoritmo", 100, 1, StatusCurso.ABERTO);
+        // Curso curso = new Curso(4,"Algoritmo", 100, 1, StatusCurso.ABERTO);
         // cursoDao.cadastrar(curso);
         cursoDao.consultarTodos();
+        cursoDao.visualizarCursos();
+        
 
         // ProfessorDao.consultarTodos();
+
+        CursoDao dao = new CursoDao(conexao);
+        // Curso novoCurso = new Curso(4, "Poo", 60, 3, StatusCurso.ABERTO);
+        // dao.cadastrar(novoCurso);
+        List<Curso> cursos = dao.consultarTodos();
+        
+        
+        for (Curso curso : cursos){
+            System.out.println("id " + curso.getId());
+            System.out.println("nome " + curso.getNome());
+        }
 
         // int i = 0;
         // while (i <= profs.size()) {
@@ -48,7 +61,8 @@ public class App {
         //     i++;
         // }
         
-        System.out.println("TESTANDO CONFLITOS");
+        // System.out.println("TESTANDO CONFLITOS");
+        // System.out.println("TESTANDO CONFLITOS");
         
     }
 }
