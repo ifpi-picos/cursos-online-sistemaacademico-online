@@ -36,9 +36,15 @@ public class App {
         // ProfessorDao.cadastrar(novoProfessor2);
         // ProfessorDao.cadastrar(novoProfessor3);
 
-        // Curso curso = new Curso(1,"Algoritmo", 100, 1, StatusCurso.ABERTO);
-        // cursoDao.cadastrar(curso);
-        cursoDao.consultarTodos();
+        Curso curso = new Curso(1,"Algoritmo", 100, 1, StatusCurso.ABERTO);
+        // Curso curso2 = new Curso(2," ddd", 100, 3, StatusCurso.ABERTO);
+        // Curso curso3 = new Curso(3,"Nodejs", 40, 9, StatusCurso.FECHADO);
+        // // cursoDao.cadastrar(curso3);
+        // // cursoDao.visualizarCursos();
+
+        System.out.println(curso.getId());
+        // cursoDao.remover(curso2);
+        // cursoDao.alterar(curso3);
 
         // ProfessorDao.consultarTodos();
 
@@ -48,7 +54,7 @@ public class App {
         //     i++;
         // }
         
-        System.out.println("TESTANDO CONFLITOS");
+        // System.out.println("TESTANDO CONFLITOS");
         
     }
 }

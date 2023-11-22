@@ -44,7 +44,7 @@ public class CursoDao implements Dao<Curso>{
     @Override
     public List<Curso> consultarTodos() {
         List<Curso> cursos = new ArrayList<>();
-        String sqlSelect = "SELECT * FROM Curso";
+        String sqlSelect = "SELECT * FROM curso";
         try {
             PreparedStatement stmt = conexao.prepareStatement(sqlSelect);
             ResultSet rs = stmt.executeQuery();
@@ -73,6 +73,8 @@ public class CursoDao implements Dao<Curso>{
             stmt.setString(2, curso.getStatus().name());
             stmt.setInt(3, curso.getCargahoraria());
             stmt.setInt(4, curso.getProf_id());
+
+            System.out.println(curso.getId() +" " + curso.getNome() + " " + curso.getCargahoraria() + " "+ curso.getProf_id() + " " + curso.getStatus().name());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -96,11 +98,13 @@ public class CursoDao implements Dao<Curso>{
 
     @Override
     public int remover(Curso curso) {
-        visualizarCursos();
         String sqlDelete = "DELETE FROM CURSO WHERE ID = ?";
         try {
             PreparedStatement stmt = conexao.prepareStatement(sqlDelete);
+            
             stmt.setInt(1, curso.getId());
+            stmt.executeUpdate();
+            System.out.println(curso.getId() + " - " + curso.getNome() + " curso removido");
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Erro ao tentar remover Curso :( " + e.getMessage());

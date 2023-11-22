@@ -18,11 +18,11 @@ public class Curso {
     }
     
     public Curso() {
-        
     }
     public int getId() {
-        return id;
+        return id = 2;
     }
+
     public void setId(int id) {
         this.id = id;
     }
