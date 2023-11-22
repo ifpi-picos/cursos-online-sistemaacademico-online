@@ -11,6 +11,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import br.edu.ifpi.entidades.Curso;
+import br.edu.ifpi.enums.StatusCurso;
 
 public class CursoDao implements Dao<Curso>{
     private Connection conexao;
@@ -54,14 +55,14 @@ public class CursoDao implements Dao<Curso>{
                 Curso curso = new Curso();
                 curso.setId(rs.getInt("id"));
                 curso.setNome(rs.getString("nome"));
-                // curso.setStatus(Enum.valueOf(Status.class, rs.getString("status")));
+                curso.setStatus(StatusCurso.valueOf(rs.getString("status")));
                 curso.setCargahoraria(rs.getInt("cargahoraria"));
                 curso.setProf_id(rs.getInt("id_professor"));
                 cursos.add(curso);
             }
 
             for (Curso c : cursos){
-                System.out.println("id : " + c.getId() + "\t Nome: " + c.getNome() + "\t carga horaria :" + c.getCargahoraria());
+                System.out.println("id : " + c.getId() + "\t Nome: " + c.getNome() + "\t carga horaria :" + c.getCargahoraria() + "\t" + c.getStatus());
             }
             rs.close();
             stmt.close();
@@ -90,7 +91,7 @@ public class CursoDao implements Dao<Curso>{
         }
     @Override
     public int alterar(Curso curso) {
-        String sqlUpdate = "UPDATE curso SET nome=?, status=?, cargahoraria=? id_professor=? WHERE ID=?" + curso.getId();
+        String sqlUpdate = "UPDATE curso SET nome=?, status=?, cargahoraria=?, id_professor=? WHERE ID=?";
         try {
             PreparedStatement stmt = conexao.prepareStatement(sqlUpdate);
             stmt.setString(1, curso.getNome());
@@ -98,7 +99,7 @@ public class CursoDao implements Dao<Curso>{
             stmt.setInt(3, curso.getCargahoraria());
             stmt.setInt(4, curso.getProf_id());
 
-            System.out.println(curso.getId() +" " + curso.getNome() + " " + curso.getCargahoraria() + " "+ curso.getProf_id() + " " + curso.getStatus().name());
+            System.out.println(curso.getId() +" " + curso.getNome() + " " + curso.getCargahoraria() + " "+ curso.getProf_id() + " " + curso.getStatus());
         } catch (Exception e) {
             e.printStackTrace();
         }

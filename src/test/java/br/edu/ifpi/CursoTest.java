@@ -50,11 +50,11 @@ public class CursoTest {
         cursodao.visualizarCursos();
 
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Digite o ID do curso a ser removido: ");
-        int idParaRemover = scanner.nextInt();
-        Curso cursoParaRemover = new Curso();
-        cursoParaRemover.setId(idParaRemover);
-        cursodao.remover(cursoParaRemover);
+        // System.out.print("Digite o ID do curso a ser removido: ");
+        // int idParaRemover = scanner.nextInt();
+        // Curso cursoParaRemover = new Curso();
+        // cursoParaRemover.setId(idParaRemover);
+        // cursodao.remover(cursoParaRemover);
   }
 
 }
