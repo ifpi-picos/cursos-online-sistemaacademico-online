@@ -53,11 +53,13 @@ public class CursoDao implements Dao<Curso>{
                 Curso curso = new Curso();
                 curso.setId(rs.getInt("id"));
                 curso.setNome(rs.getString("nome"));
-                curso.setStatus(Enum.valueOf(Status.class, rs.getString("status")));
+                // curso.setStatus(Enum.valueOf(Status.class, rs.getString("status")));
                 curso.setCargahoraria(rs.getInt("cargahoraria"));
                 curso.setProf_id(rs.getInt("id_professor"));
                 cursos.add(curso);
             }
+            rs.close();
+            stmt.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -82,12 +84,12 @@ public class CursoDao implements Dao<Curso>{
     }
 
     public void visualizarCursos() {
-        String selecaoColuna = "SELECT ID, NOME FROM CURSO";
+        String selecaoColuna = "SELECT ID, NOME, cargahoraria FROM CURSO";
         try {
             PreparedStatement stmt = conexao.prepareStatement(selecaoColuna);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                System.out.println(rs.getInt("ID") + "\t" + rs.getString("NOME"));
+                System.out.println(rs.getInt("ID") + "\t" + rs.getString("NOME") + " -" + rs.getInt("cargahoraria"));
             }
             rs.close();
             stmt.close();
@@ -99,9 +101,9 @@ public class CursoDao implements Dao<Curso>{
     @Override
     public int remover(Curso curso) {
         String sqlDelete = "DELETE FROM CURSO WHERE ID = ?";
+        
         try {
             PreparedStatement stmt = conexao.prepareStatement(sqlDelete);
-            
             stmt.setInt(1, curso.getId());
             stmt.executeUpdate();
             System.out.println(curso.getId() + " - " + curso.getNome() + " curso removido");

@@ -19,12 +19,19 @@ public class AlunoDao implements Dao<Aluno> {
 
     @Override
     public int cadastrar(Aluno aluno) {
-        String SQL_INSERT = "INSERT INTO ALUNOS (NOME, EMAIL) VALUES(?,?)";
+        String SQL_INSERT = "INSERT INTO ALUNO (NOME, EMAIL) VALUES(?,?)";
 
         try{
+
             PreparedStatement stmt =  conexao.prepareStatement(SQL_INSERT);
             stmt.setString(1, aluno.getNome());
             stmt.setString(2, aluno.getEmail());
+            int row = stmt.executeUpdate();
+
+
+            System.out.println(row);
+            return row;
+
         }catch (SQLException e){
             System.err.format("SQL State %s\n%s", e.getSQLState(), e.getMessage());
         }catch (Exception e){
@@ -36,8 +43,8 @@ public class AlunoDao implements Dao<Aluno> {
     @Override
     public List<Aluno> consultarTodos() {
        ResultSet rs = null;
+       String consulta = "SELECT * FROM alunos ORDER BY id";
        try {
-        String consulta = "SELECT * FROM alunos ORDER BY id";
         PreparedStatement pstm = conexao.prepareStatement(consulta);
         rs = pstm.executeQuery();
 
@@ -52,8 +59,8 @@ public class AlunoDao implements Dao<Aluno> {
 
     @Override
     public int alterar(Aluno aluno) {
+        String sqlUpdate = "UPDATE alunos SET NOME=?, EMAIL=? WHERE ID=?" + aluno.getId();
         try {
-            String sqlUpdate = "UPDATE alunos SET NOME=?, EMAIL=? WHERE ID=?" + aluno.getId();
             PreparedStatement stmt = conexao.prepareStatement(sqlUpdate);
             stmt.setString(1, aluno.getNome());
             stmt.setString(2, aluno.getEmail());
@@ -65,8 +72,9 @@ public class AlunoDao implements Dao<Aluno> {
     
     @Override
     public int remover(Aluno aluno) {
+        String sqlDelete = "DELETE FROM alunos WHERE ID = ?" + aluno.getId();
+
         try {
-            String sqlDelete = "DELETE FROM alunos WHERE ID = ?" + aluno.getId();
             
             PreparedStatement stmt = conexao.prepareStatement(sqlDelete);
             stmt.setInt(1, (int) aluno.getId());
