@@ -17,7 +17,8 @@ public class ProfessorDao implements Dao<Professor> {
     public ProfessorDao(Connection conexao) {
         this.conexao = conexao;
     }
-//-------------------------------------CADASTRO--------------------------------------------------------
+
+    // -------------------------------------CADASTRO--------------------------------------------------------
     @Override
     public int cadastrar(Professor professor) {
         String SQL_INSERT = "INSERT INTO professor (nome, email) VALUES(?,?)";
@@ -41,7 +42,8 @@ public class ProfessorDao implements Dao<Professor> {
 
         return 0;
     }
-//----------------------------------------------------CONSULTA------------------------------------------
+
+    // ----------------------------------------------------CONSULTA------------------------------------------
     @Override
     public List<Professor> consultarTodos() {
 
@@ -55,10 +57,9 @@ public class ProfessorDao implements Dao<Professor> {
             while (resultSet.next()) {
                 Professor prof = new Professor();
                 prof.setId(resultSet.getInt("id"));
-               prof.setNomeP(resultSet.getString("nome"));
-               prof.setEmail(resultSet.getString("email"));
+                prof.setNomeP(resultSet.getString("nome"));
+                prof.setEmail(resultSet.getString("email"));
 
-                
                 professores.add(prof);
 
             }
@@ -73,8 +74,7 @@ public class ProfessorDao implements Dao<Professor> {
         }
         return professores;
     }
-//------------------------------------------------VIZUALIZAR--------------------------------------------------------
-
+    // ------------------------------------------------VIZUALIZAR--------------------------------------------------------
 
     public void visualizarProfessor() {
         String selecaoColuna = "SELECT curso.nome AS nome_curso, professor.nome AS nome_professor FROM curso INNER JOIN professor ON curso.id_professor = professor.id";
@@ -82,7 +82,8 @@ public class ProfessorDao implements Dao<Professor> {
             PreparedStatement stmt = conexao.prepareStatement(selecaoColuna);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                System.out.println("Nome do Professor: " + rs.getString("nome_professor") + "\tNome Curso: "+ rs.getString("nome_curso"));
+                System.out.println("Nome do Professor: " + rs.getString("nome_professor") + "\tNome Curso: "
+                        + rs.getString("nome_curso"));
             }
             rs.close();
             stmt.close();
@@ -90,23 +91,26 @@ public class ProfessorDao implements Dao<Professor> {
             e.printStackTrace();
         }
     }
-//-----------------------------------------ALTERAR------------------------------------------
-    @Override
-    public int alterar(Professor professor){
 
-    String modificacao = "UPDATE professor SET NOME=?, EMAIL=? WHERE ID=?";
+    // -----------------------------------------ALTERAR------------------------------------------
+    @Override
+    public int alterar(Professor professor) {
+
+        String modificacao = "UPDATE professor SET NOME=?, EMAIL=? WHERE ID=?";
 
         try {
-       PreparedStatement stmt = conexao.prepareStatement(modificacao);
-       
-    stmt.setString(1,professor.getNomeP());
-    stmt.setString(2,professor.getEmail());
+            PreparedStatement stmt = conexao.prepareStatement(modificacao);
 
-    } catch (Exception e) {
-    e.printStackTrace();
+            stmt.setString(1, professor.getNomeP());
+            stmt.setString(2, professor.getEmail());
+            stmt.setInt(3, professor.getId());
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
-    return 0;
-    }
+
     @Override
     public int remover(Professor professor) {
 
@@ -120,7 +124,5 @@ public class ProfessorDao implements Dao<Professor> {
         }
         return 0;
     }
-
-   
 
 }

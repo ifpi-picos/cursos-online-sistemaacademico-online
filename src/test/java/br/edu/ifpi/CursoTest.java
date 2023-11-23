@@ -54,25 +54,24 @@ public class CursoTest {
         // int idParaRemover = scanner.nextInt();
         // Curso cursoParaRemover = new Curso();
         // cursoParaRemover.setId(idParaRemover);
-        // cursodao.remover(cursoParaRemover);
-
-        System.out.print("Digite o ID do curso a ser alterado: ");
+ 
+   System.out.print("Digite o ID do curso a ser alterado: ");
         int alteracao = scanner.nextInt();
 
         scanner.nextLine();
-        
+
         Curso cursoalterado = new Curso();
 
         cursoalterado.setId(alteracao);
         System.out.println("novo nome: ");
         cursoalterado.setNome(scanner.nextLine());
-        
+
         System.out.println("staus do curso");
         cursoalterado.setStatus(StatusCurso.valueOf(scanner.next()));
-        
+
         System.out.println("nova carga horaria: ");
         cursoalterado.setCargahoraria(scanner.nextInt());
-        
+
         System.out.println("novo professor: ");
         cursoalterado.setProf_id(scanner.nextInt());
         cursodao.alterar(cursoalterado);
