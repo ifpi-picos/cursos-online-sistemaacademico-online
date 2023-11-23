@@ -10,8 +10,9 @@ public static void main(String[] args) {
      Connection conexao = Conexacao.getConexao();
 
         ProfessorDao ProfessorDao = new ProfessorDao(conexao);
+        ProfessorDao.consultarTodos();
         ProfessorDao.visualizarProfessor();
-        //ProfessorDao.consultarTodos();
+   
 
 }
 }

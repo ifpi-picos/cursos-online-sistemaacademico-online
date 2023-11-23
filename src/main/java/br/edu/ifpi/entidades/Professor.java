@@ -5,6 +5,7 @@ public class Professor {
     private int id;
     private String email;
 
+    
     public Professor(String nomeP, String email) {
         this.nomeP = nomeP;
         this.email = email;
@@ -16,16 +17,28 @@ public class Professor {
         this.email = email;
     }
 
+    public Professor() {
+    }
+
     public String getNomeP() {
         return nomeP;
     }
+     public void setNomeP(String nomeP) {
+        this.nomeP = nomeP;
+    }
     public int getId() {
         return id;
+    }
+public void setId(int id) {
+        this.id = id;
     }
 
 
     public String getEmail() {
         return email;
+    }
+public void setEmail(String email) {
+        this.email = email;
     }
 
 
