@@ -73,7 +73,7 @@ public class ProfessorDao implements Dao<Professor> {
 
 
         public void visualizarProfessor() {
-            String selecaoColuna = "SELECT professor.nome AS nome_professor, curso.nome AS nome_curso FROM professor INNER JOIN curso ON professor.nome = curso.nome";
+            String selecaoColuna = "SELECT professor.nome AS nome_professor, curso.nome AS nome_curso FROM professor INNER JOIN curso ON professor.nomeP = curso.nomeC";
             try {
                 PreparedStatement stmt = conexao.prepareStatement(selecaoColuna);
                 ResultSet rs = stmt.executeQuery();

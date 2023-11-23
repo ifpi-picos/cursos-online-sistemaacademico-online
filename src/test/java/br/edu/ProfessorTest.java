@@ -11,7 +11,7 @@ public static void main(String[] args) {
 
         ProfessorDao ProfessorDao = new ProfessorDao(conexao);
         ProfessorDao.visualizarProfessor();
-        ProfessorDao.consultarTodos();
+        //ProfessorDao.consultarTodos();
 
 }
 }
