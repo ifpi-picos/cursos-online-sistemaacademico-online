@@ -40,20 +40,20 @@ public class App {
         // cursoDao.cadastrar(curso);
         cursoDao.consultarTodos();
         cursoDao.visualizarCursos();
-        
+        ProfessorDao.visualizarProfessor();
 
         // ProfessorDao.consultarTodos();
 
         CursoDao dao = new CursoDao(conexao);
         // Curso novoCurso = new Curso(4, "Poo", 60, 3, StatusCurso.ABERTO);
         // dao.cadastrar(novoCurso);
-        List<Curso> cursos = dao.consultarTodos();
+        // List<Curso> cursos = dao.consultarTodos();
         
         
-        for (Curso curso : cursos){
-            System.out.println("id " + curso.getId());
-            System.out.println("nome " + curso.getNome());
-        }
+        // for (Curso curso : cursos){
+        //     System.out.println("id " + curso.getId());
+        //     System.out.println("nome " + curso.getNomeC());
+        // }
 
         // int i = 0;
         // while (i <= profs.size()) {

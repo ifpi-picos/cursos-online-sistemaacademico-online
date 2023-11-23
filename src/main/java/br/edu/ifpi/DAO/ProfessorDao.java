@@ -25,7 +25,7 @@ public class ProfessorDao implements Dao<Professor> {
         try {
             PreparedStatement preparedStatement = conexao.prepareStatement(SQL_INSERT);
 
-            preparedStatement.setString(1, professor.getNome());
+            preparedStatement.setString(1, professor.getNomeP());
             preparedStatement.setString(2, professor.getEmail());
 
             int row = preparedStatement.executeUpdate();
@@ -66,6 +66,20 @@ public class ProfessorDao implements Dao<Professor> {
     
             return professores;
         }
+        public void visualizarProfessor() {
+            String selecaoColuna = "SELECT nome , nome FROM professor INNER JOIN curso ON professor.nome = curso.nome";
+            try {
+                PreparedStatement stmt = conexao.prepareStatement(selecaoColuna);
+                ResultSet rs = stmt.executeQuery();
+                while (rs.next()) {
+                    System.out.println(rs.getString("NOME") + "\t" + rs.getString("NOME"));
+                }
+                rs.close();
+                stmt.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     
    // @Override
     // public int alterar(Professor professor){
@@ -99,7 +113,5 @@ public class ProfessorDao implements Dao<Professor> {
         throw new UnsupportedOperationException("Unimplemented method 'alterar'");
     }
 
-    // public int remover(int i) {
-    //     return 0;
-    // }
+   
 }

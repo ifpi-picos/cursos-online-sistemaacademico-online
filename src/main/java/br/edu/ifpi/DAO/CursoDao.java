@@ -25,7 +25,7 @@ public class CursoDao implements Dao<Curso>{
 
         try{
             PreparedStatement stmt =  conexao.prepareStatement(SQL_INSERT);
-            stmt.setString(1, curso.getNome());
+            stmt.setString(1, curso.getNomeC());
             stmt.setInt(3, curso.getCargahoraria());
             stmt.setInt(4, curso.getProf_id());
             stmt.setString(2, curso.getStatus().name());
@@ -71,7 +71,7 @@ public class CursoDao implements Dao<Curso>{
         String sqlUpdate = "UPDATE curso SET nome=?, status=?, cargahoraria=? id_professor=? WHERE ID=?" + curso.getId();
         try {
             PreparedStatement stmt = conexao.prepareStatement(sqlUpdate);
-            stmt.setString(1, curso.getNome());
+            stmt.setString(1, curso.getNomeC());
             stmt.setString(2, curso.getStatus().name());
             stmt.setInt(3, curso.getCargahoraria());
             stmt.setInt(4, curso.getProf_id());

@@ -5,13 +5,13 @@ import br.edu.ifpi.enums.StatusCurso;
 
 public class Curso {
     private int id;
-    private String nome;
+    private String nomeC;
     private int carga_horaria;
     private int id_professor;
     private StatusCurso status;
     
-    public Curso(int id, String nome,int carga_horaria, int id_professor, StatusCurso status) {
-        this.nome = nome;
+    public Curso(int id, String nomeC,int carga_horaria, int id_professor, StatusCurso status) {
+        this.nomeC = nomeC;
         this.carga_horaria = carga_horaria;
         this.id_professor = id_professor;
         this.status = status;
@@ -27,11 +27,11 @@ public class Curso {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNomeC() {
+        return nomeC;
     }
     public void setNome(String nome) {
-        this.nome = nome;
+        this.nomeC = nome;
     }
 
     public StatusCurso getStatus() {
