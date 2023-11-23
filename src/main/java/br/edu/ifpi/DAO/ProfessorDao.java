@@ -9,7 +9,6 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import br.edu.ifpi.entidades.Curso;
 import br.edu.ifpi.entidades.Professor;
 
 public class ProfessorDao implements Dao<Professor> {
@@ -52,35 +51,35 @@ public class ProfessorDao implements Dao<Professor> {
              ResultSet resultSet = statement.executeQuery()) {
 
             while (resultSet.next()) {
-                Professor prof = new Professor(0, consulta, consulta);
 
                 int id = resultSet.getInt("id");
                 String nome = resultSet.getString("nome");
                 String email = resultSet.getString("email");
                 
+                Professor prof =new Professor(id,nome,email);
                 professores.add(prof);
                 
-                for (Professor p : professores ){
-                System.out.println("id : " + p.getId() + "\t ID: " + p.getId() + "\t Nome  :" + p.getNomeP() + "\t" + p.getEmail());
-            }
-            resultSet.close();
-            statement.close();
+                
+            
         }
+        for (Professor p : professores ){
+                System.out.println("id : " + p.getId() + "\t Nome  :" + p.getNomeP() + "\t" + p.getEmail());
+            }
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao consultar professores", e);
         }
             return professores;
         }
+
+
         public void visualizarProfessor() {
-            String selecaoColuna = "SELECT nome , nome FROM professor INNER JOIN curso ON professor.nome = curso.nome";
+            String selecaoColuna = "SELECT professor.nome AS nome_professor, curso.nome AS nome_curso FROM professor INNER JOIN curso ON professor.nome = curso.nome";
             try {
                 PreparedStatement stmt = conexao.prepareStatement(selecaoColuna);
                 ResultSet rs = stmt.executeQuery();
                 while (rs.next()) {
-                    System.out.println(rs.getString("NOME") + "\t" + rs.getString("NOME"));
+                    System.out.println("Nome do Professor: " +rs.getString("nome_professor") + "\tNome Curso: " + rs.getString("nome_curso"));
                 }
-                rs.close();
-                stmt.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
