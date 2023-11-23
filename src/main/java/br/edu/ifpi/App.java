@@ -58,7 +58,7 @@ public class App {
         Aluno aluno1 = new Aluno("samya", "sam@aluno.ifpi.edu.br");
         // alunoConexao.cadastrar(aluno1);
         Aluno al2 = new Aluno("Katarina", "katarina@aluno.ifpi.edu.br");
-        alunoConexao.cadastrar(al2);
+       // alunoConexao.cadastrar(al2);
 
         // int i = 0;
         // while (i <= profs.size()) {
