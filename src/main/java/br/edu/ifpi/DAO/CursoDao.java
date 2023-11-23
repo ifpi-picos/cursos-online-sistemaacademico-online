@@ -89,22 +89,24 @@ public class CursoDao implements Dao<Curso>{
                 e.printStackTrace();
             }
         }
-    @Override
-    public int alterar(Curso curso) {
-        String sqlUpdate = "UPDATE curso SET nome=?, status=?, cargahoraria=?, id_professor=? WHERE ID=?";
-        try {
-            PreparedStatement stmt = conexao.prepareStatement(sqlUpdate);
-            stmt.setString(1, curso.getNomeC());
-            stmt.setString(2, curso.getStatus().name());
-            stmt.setInt(3, curso.getCargahoraria());
-            stmt.setInt(4, curso.getProf_id());
-
-            System.out.println(curso.getId() +" " + curso.getNomeC() + " " + curso.getCargahoraria() + " "+ curso.getProf_id() + " " + curso.getStatus());
-        } catch (Exception e) {
-            e.printStackTrace();
+        @Override
+        public int alterar(Curso curso) {
+            String sqlUpdate = "UPDATE curso SET nome=?, status=?, cargahoraria=?, id_professor=? WHERE ID=?";
+            try {
+                PreparedStatement stmt = conexao.prepareStatement(sqlUpdate);
+                stmt.setString(1, curso.getNomeC());
+                stmt.setString(2, curso.getStatus().name());
+                stmt.setInt(3, curso.getCargahoraria());
+                stmt.setInt(4, curso.getProf_id());
+                stmt.setInt(5, curso.getId());
+                stmt.executeUpdate();
+    
+                System.out.println(curso.getId() +" " + curso.getNomeC() + " " + curso.getCargahoraria() + " "+ curso.getProf_id() + " " + curso.getStatus());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return 0;
         }
-        return 0;
-    }
     @Override
     public int remover(Curso curso) {
         String sqlDelete = "DELETE FROM CURSO WHERE ID = ?";
