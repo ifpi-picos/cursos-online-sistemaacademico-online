@@ -12,6 +12,7 @@ public static void main(String[] args) {
         ProfessorDao ProfessorDao = new ProfessorDao(conexao);
         ProfessorDao.consultarTodos();
         ProfessorDao.visualizarProfessor();
+        ProfessorDao.alterar();
    
 
 }

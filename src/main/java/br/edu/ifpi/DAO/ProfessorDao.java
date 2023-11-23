@@ -56,7 +56,7 @@ public class ProfessorDao implements Dao<Professor> {
                 Professor prof = new Professor();
                 prof.setId(resultSet.getInt("id"));
                prof.setNomeP(resultSet.getString("nome"));
-            prof.setEmail(resultSet.getString("email"));
+               prof.setEmail(resultSet.getString("email"));
 
                 
                 professores.add(prof);
@@ -73,7 +73,7 @@ public class ProfessorDao implements Dao<Professor> {
         }
         return professores;
     }
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------------VIZUALIZAR--------------------------------------------------------
 
 
     public void visualizarProfessor() {
@@ -90,20 +90,23 @@ public class ProfessorDao implements Dao<Professor> {
             e.printStackTrace();
         }
     }
+//-----------------------------------------ALTERAR------------------------------------------
+    @Override
+    public int alterar(Professor professor){
 
-    // @Override
-    // public int alterar(Professor professor){
-    // try {
-    // String modificacao = "UPDATE professor SET NOME=?, EMAIL=? WHERE ID=?" +
-    // professor.getId();
-    // PreparedStatement stmt = conexao.prepareStatement(modificacao);
-    // stmt.setString(1,professor.getNome());
-    // stmt.setString(2,professor.getEmail());
-    // } catch (Exception e) {
-    // e.printStackTrace();
-    // }
-    // return 0;
-    // }
+    String modificacao = "UPDATE professor SET NOME=?, EMAIL=? WHERE ID=?";
+
+        try {
+       PreparedStatement stmt = conexao.prepareStatement(modificacao);
+       
+    stmt.setString(1,professor.getNomeP());
+    stmt.setString(2,professor.getEmail());
+
+    } catch (Exception e) {
+    e.printStackTrace();
+    }
+    return 0;
+    }
     @Override
     public int remover(Professor professor) {
 
@@ -118,10 +121,6 @@ public class ProfessorDao implements Dao<Professor> {
         return 0;
     }
 
-    @Override
-    public int alterar(Professor entidade) {
-
-        throw new UnsupportedOperationException("Unimplemented method 'alterar'");
-    }
+   
 
 }
