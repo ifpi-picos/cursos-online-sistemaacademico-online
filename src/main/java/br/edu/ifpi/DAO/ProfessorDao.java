@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import br.edu.ifpi.entidades.Curso;
 import br.edu.ifpi.entidades.Professor;
 
 public class ProfessorDao implements Dao<Professor> {
@@ -43,27 +44,31 @@ public class ProfessorDao implements Dao<Professor> {
     }
     @Override
     public List<Professor>consultarTodos(){
+
             List<Professor> professores = new ArrayList<>(); 
-    
             String consulta = "SELECT * FROM PROFESSOR";
     
             try (PreparedStatement statement = conexao.prepareStatement(consulta);
              ResultSet resultSet = statement.executeQuery()) {
 
             while (resultSet.next()) {
+                Professor prof = new Professor(0, consulta, consulta);
+
                 int id = resultSet.getInt("id");
                 String nome = resultSet.getString("nome");
                 String email = resultSet.getString("email");
-
-                Professor professor = new Professor(id,nome, email);
-
                 
-                professores.add(professor);
+                professores.add(prof);
+                
+                for (Professor p : professores ){
+                System.out.println("id : " + p.getId() + "\t ID: " + p.getId() + "\t Nome  :" + p.getNomeP() + "\t" + p.getEmail());
             }
+            resultSet.close();
+            statement.close();
+        }
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao consultar professores", e);
         }
-    
             return professores;
         }
         public void visualizarProfessor() {

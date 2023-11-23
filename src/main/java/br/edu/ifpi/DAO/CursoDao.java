@@ -11,6 +11,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import br.edu.ifpi.entidades.Curso;
+import br.edu.ifpi.enums.StatusCurso;
 
 public class CursoDao implements Dao<Curso>{
     private Connection conexao;
@@ -41,10 +42,11 @@ public class CursoDao implements Dao<Curso>{
         return 0;  
       }
 
+
     @Override
     public List<Curso> consultarTodos() {
         List<Curso> cursos = new ArrayList<>();
-        String sqlSelect = "SELECT * FROM Curso";
+        String sqlSelect = "SELECT * FROM curso";
         try {
             PreparedStatement stmt = conexao.prepareStatement(sqlSelect);
             ResultSet rs = stmt.executeQuery();
@@ -53,10 +55,14 @@ public class CursoDao implements Dao<Curso>{
                 Curso curso = new Curso();
                 curso.setId(rs.getInt("id"));
                 curso.setNome(rs.getString("nome"));
-                // curso.setStatus(Enum.valueOf(Status.class, rs.getString("status")));
+                curso.setStatus(StatusCurso.valueOf(rs.getString("status")));
                 curso.setCargahoraria(rs.getInt("cargahoraria"));
                 curso.setProf_id(rs.getInt("id_professor"));
                 cursos.add(curso);
+            }
+
+            for (Curso c : cursos){
+                System.out.println("id : " + c.getId() + "\t Nome: " + c.getNomeC() + "\t carga horaria :" + c.getCargahoraria() + "\t" + c.getStatus());
             }
             rs.close();
             stmt.close();
@@ -66,44 +72,48 @@ public class CursoDao implements Dao<Curso>{
         return cursos;
     }
 
+        public void visualizarCursos() {
+            String selecaoColuna = "SELECT ID, NOME, cargahoraria FROM CURSO";
+            try {
+                PreparedStatement stmt = conexao.prepareStatement(selecaoColuna);
+                ResultSet rs = stmt.executeQuery();
+                System.out.println("-----------Cursos-----------");
+                while (rs.next()) {
+                    System.out.println(rs.getInt("ID") + "\t" + rs.getString("NOME"));
+                }             
+                System.out.println("-----------------------------");
+    
+                rs.close();
+                stmt.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     @Override
     public int alterar(Curso curso) {
-        String sqlUpdate = "UPDATE curso SET nome=?, status=?, cargahoraria=? id_professor=? WHERE ID=?" + curso.getId();
+        String sqlUpdate = "UPDATE curso SET nome=?, status=?, cargahoraria=?, id_professor=? WHERE ID=?";
         try {
             PreparedStatement stmt = conexao.prepareStatement(sqlUpdate);
             stmt.setString(1, curso.getNomeC());
             stmt.setString(2, curso.getStatus().name());
             stmt.setInt(3, curso.getCargahoraria());
             stmt.setInt(4, curso.getProf_id());
+
+            System.out.println(curso.getId() +" " + curso.getNomeC() + " " + curso.getCargahoraria() + " "+ curso.getProf_id() + " " + curso.getStatus());
         } catch (Exception e) {
             e.printStackTrace();
         }
         return 0;
     }
-
-    public void visualizarCursos() {
-        String selecaoColuna = "SELECT ID, NOME, cargahoraria FROM CURSO";
-        try {
-            PreparedStatement stmt = conexao.prepareStatement(selecaoColuna);
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                System.out.println(rs.getInt("ID") + "\t" + rs.getString("NOME") + " -" + rs.getInt("cargahoraria"));
-            }
-            rs.close();
-            stmt.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     @Override
     public int remover(Curso curso) {
         String sqlDelete = "DELETE FROM CURSO WHERE ID = ?";
         
         try {
             PreparedStatement stmt = conexao.prepareStatement(sqlDelete);
-
             stmt.setInt(1, curso.getId());
+            stmt.executeUpdate();
+            System.out.println(curso.getId()  + " curso removido");
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Erro ao tentar remover Curso :( " + e.getMessage());
