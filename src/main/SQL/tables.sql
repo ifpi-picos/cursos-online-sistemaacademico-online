@@ -10,7 +10,7 @@ CREATE TABLE professor(
 );
 
 CREATE TABLE aluno(
-    id_aluno serial NOT NULL,
+    id serial NOT NULL,
     nome varchar (250) NOT NULL,
     email character varying(255) NOT NULL,
     PRIMARY KEY (id)

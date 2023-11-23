@@ -49,15 +49,15 @@ public class AlunoDao implements Dao<Aluno> {
 
             while (rs.next()) {
                 Aluno aluno = new Aluno();
-                aluno.setId_aluno(rs.getInt("id_aluno"));
+                aluno.setId_aluno(rs.getInt("id"));
                 aluno.setNome(rs.getString("nome"));
                 aluno.setEmail(rs.getString("email"));
                 al.add(aluno);
 
             }
-            for (Aluno aluno : al) {
+            for (Aluno a : al) {
                 System.out.println(
-                        "id" + aluno.getId_aluno() + "\t Nome: " + aluno.getNome() + "\t Email: " + aluno.getEmail());
+                        "id " + a.getId_aluno() + "\t Nome: " + a.getNome() + "\t Email: " + a.getEmail());
             }
             rs.close();
             pstm.close();
