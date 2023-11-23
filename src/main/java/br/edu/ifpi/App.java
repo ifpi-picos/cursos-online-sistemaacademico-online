@@ -41,10 +41,7 @@ public class App {
 
 
 
-        // Aluno aluno1 = new Aluno("samya", "sam@aluno.ifpi.edu.br");
-        // alunoConexao.cadastrar(aluno1);
-        // Aluno al2 = new Aluno("Katarina", "katarina@aluno.ifpi.edu.br");
-        // alunoConexao.cadastrar(al2);
+        
 
         // ProfessorDao.consultarTodos();
 
@@ -54,7 +51,6 @@ public class App {
         // i++;
         // }
         
-        System.out.println("TESTANDO CONFLITOS");
         
     }
 }
