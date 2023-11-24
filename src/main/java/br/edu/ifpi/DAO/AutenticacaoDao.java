@@ -30,6 +30,7 @@ public class AutenticacaoDao {
                 int id_a = resultSet.getInt("id");
                 String nome_a = resultSet.getString("nome");
                 String email_a = resultSet.getString("email");
+                System.out.println("bem vindo ao sistema academico Aluno " + nome_a);
 
                 return new Aluno( id_a,nome_a,email_a);
             }

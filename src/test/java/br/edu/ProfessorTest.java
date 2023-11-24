@@ -6,6 +6,7 @@ import java.util.Scanner;
 import br.edu.ifpi.DAO.AutenticacaoDao;
 import br.edu.ifpi.DAO.Conexacao;
 import br.edu.ifpi.DAO.ProfessorDao;
+import br.edu.ifpi.entidades.Aluno;
 import br.edu.ifpi.entidades.Professor;
 
 
@@ -18,7 +19,9 @@ public class ProfessorTest {
                   AutenticacaoDao autentificacaodao= new AutenticacaoDao(conexao);
                 //consultar toda a tabela(id,professor,email)
                 Professor altentica_prof= autentificacaodao.autenticarProfessor(7);
+                Aluno altentica_alu= autentificacaodao.autenticarAluno(3);
                 ProfessorDao.consultarTodos();
+
                 //vizualizar tabela(professor e curso)
                 //ProfessorDao.visualizarProfessor();
               
