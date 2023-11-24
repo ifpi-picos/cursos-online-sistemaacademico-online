@@ -18,31 +18,42 @@ public class ProfessorTest {
                 
                 ProfessorDao.consultarTodos();
                 //vizualizar tabela(professor e curso)
-                ProfessorDao.visualizarProfessor();
+                //ProfessorDao.visualizarProfessor();
                 
                
                 Scanner scan = new Scanner(System.in);
 
                 //entrada de dados
-                System.out.println(" Digite o id do professor que deseja alterar: ");
-                int Id_alter = scan.nextInt();
-                scan.nextLine();
+                // System.out.println(" Digite o id do professor que deseja alterar: ");
+                // int Id_alter = scan.nextInt();
+                // scan.nextLine();
 
-                Professor prof_alter = new Professor();
+                // Professor prof_alter = new Professor();
 
-                //pelo id alterar nome e email
-                prof_alter.setId(Id_alter);
+                // //pelo id alterar nome e email
+                // prof_alter.setId(Id_alter);
 
-                System.out.println("Novo Nome: ");
-                prof_alter.setNomeP(scan.nextLine());
+                // System.out.println("Novo Nome: ");
+                // prof_alter.setNomeP(scan.nextLine());
 
-                System.out.println("Novo Email: ");
-                prof_alter.setEmail(scan.next());
+                // System.out.println("Novo Email: ");
+                // prof_alter.setEmail(scan.next());
 
-                //alterar professor 
-                ProfessorDao.alterar(prof_alter);
+                // //alterar professor 
+                // ProfessorDao.alterar(prof_alter);
 
                 //tabela já atualizada
+
+                System.out.println(" Digite o id do professor que deseja remover: ");
+                int Id_remov = scan.nextInt();
+                
+
+                Professor prof_remov= new Professor();
+                prof_remov.setId((Id_remov));
+
+                //remover professor 
+                ProfessorDao.remover(prof_remov);
+
                 ProfessorDao.consultarTodos();
         }
 }

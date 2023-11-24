@@ -110,15 +110,17 @@ public class ProfessorDao implements Dao<Professor> {
         }
         return 0;
     }
-//----------------------------------------------------------------------------------------------------
+//-------------------------------------------------------REMOVER -----------------------------------
 
     @Override
     public int remover(Professor professor) {
 
-        String remocao = "DELETE FROM professsor WHERE id = ?";
-        try (PreparedStatement stmt = conexao.prepareStatement(remocao)) {
+        String remocao = "DELETE FROM professor WHERE id = ?";
+        try  {
+            PreparedStatement stmt = conexao.prepareStatement(remocao);
             stmt.setInt(1, professor.getId());
-            return stmt.executeUpdate();
+
+         stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Erro ao tentar remover o professor: " + e.getMessage());
