@@ -3,6 +3,7 @@ package br.edu;
 import java.sql.Connection;
 import java.util.Scanner;
 
+import br.edu.ifpi.DAO.AutenticacaoDao;
 import br.edu.ifpi.DAO.Conexacao;
 import br.edu.ifpi.DAO.ProfessorDao;
 import br.edu.ifpi.entidades.Professor;
@@ -14,12 +15,13 @@ public class ProfessorTest {
                 Connection conexao = Conexacao.getConexao();
                
                 ProfessorDao ProfessorDao = new ProfessorDao(conexao);
+                  AutenticacaoDao autentificacaodao= new AutenticacaoDao(conexao);
                 //consultar toda a tabela(id,professor,email)
-                
+                Professor altentica_prof= autentificacaodao.autenticarProfessor(7);
                 ProfessorDao.consultarTodos();
                 //vizualizar tabela(professor e curso)
                 //ProfessorDao.visualizarProfessor();
-                
+              
                
                 Scanner scan = new Scanner(System.in);
 
