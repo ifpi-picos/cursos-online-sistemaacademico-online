@@ -55,7 +55,7 @@ public class CursoTest {
         // Curso cursoParaRemover = new Curso();
         // cursoParaRemover.setId(idParaRemover);
  
-   System.out.print("Digite o ID do curso a ser alterado: ");
+        System.out.print("Digite o ID do curso a ser alterado: ");
         int alteracao = scanner.nextInt();
 
         scanner.nextLine();
