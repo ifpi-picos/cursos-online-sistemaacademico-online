@@ -16,6 +16,7 @@ public class Professor {
         this.id = id;
         this.email = email;
     }
+  
 
     public Professor() {
     }

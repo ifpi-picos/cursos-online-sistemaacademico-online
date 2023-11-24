@@ -17,6 +17,7 @@ public class Aluno {
         this.nome = nome;
         this.email = email;
     }
+    
 
     public Aluno() {
     }
