@@ -48,7 +48,7 @@ public class ProfessorDao implements Dao<Professor> {
     public List<Professor> consultarTodos() {
 
         List<Professor> professores = new ArrayList<>();
-        String consulta = "SELECT * FROM PROFESSOR";
+        String consulta = "SELECT * FROM PROFESSOR ORDER BY id ";
 
         try {
             PreparedStatement statement = conexao.prepareStatement(consulta);
@@ -110,6 +110,7 @@ public class ProfessorDao implements Dao<Professor> {
         }
         return 0;
     }
+//----------------------------------------------------------------------------------------------------
 
     @Override
     public int remover(Professor professor) {

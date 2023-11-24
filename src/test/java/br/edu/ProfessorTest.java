@@ -15,7 +15,8 @@ public class ProfessorTest {
                 ProfessorDao ProfessorDao = new ProfessorDao(conexao);
                 ProfessorDao.consultarTodos();
                 ProfessorDao.visualizarProfessor();
-                // ProfessorDao.alterar();
+                
+                
                 Scanner scan = new Scanner(System.in);
                 System.out.println(" Digite o id do professor que 7deseja alterar: ");
                 int Id_alter = scan.nextInt();
