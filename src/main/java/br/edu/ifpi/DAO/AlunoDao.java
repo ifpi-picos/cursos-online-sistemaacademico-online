@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import br.edu.ifpi.entidades.Aluno;
 
 public class AlunoDao implements Dao<Aluno> {
@@ -84,17 +86,19 @@ public class AlunoDao implements Dao<Aluno> {
 
     @Override
     public int remover(Aluno aluno) {
-        String sqlDelete = "DELETE FROM alunos WHERE ID = ?" + aluno.getId_aluno();
+        String sqlDelete = "DELETE FROM aluno WHERE ID = ?" ;
 
         try {
 
             PreparedStatement stmt = conexao.prepareStatement(sqlDelete);
-            stmt.setInt(1, (int) aluno.getId_aluno());
+            stmt.setInt(1, aluno.getId_aluno());
             stmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao tentar remover o professor: " + e.getMessage());
         }
         return 0;
     }
+
 
 }

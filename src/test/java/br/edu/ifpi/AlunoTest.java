@@ -22,7 +22,7 @@ public class AlunoTest {
 
         alunoConexao.consultarTodos();
 
-        // Scanner scanner = new Scanner(System.in);
+         Scanner scanner = new Scanner(System.in);
         // System.out.println("Digite o id do aluno");
         // int Id_alter = scanner.nextInt();
         // scanner.nextLine();
@@ -38,6 +38,14 @@ public class AlunoTest {
 
         // alunoConexao.alterar(aluno_alter);
 
+        Aluno aluno_remover = new Aluno();
+        System.out.println("Digite o id do aluno que deseja remover: ");
+        int id_remove = scanner.nextInt();
+
+        aluno_remover.setId_aluno((id_remove));
+
+        alunoConexao.remover(aluno_remover);
+        alunoConexao.consultarTodos();
     }
 
 }
