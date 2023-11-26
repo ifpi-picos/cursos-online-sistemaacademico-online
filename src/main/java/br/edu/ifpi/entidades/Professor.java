@@ -11,7 +11,7 @@ public class Professor {
         this.email = email;
     }
 
-    public Professor(int id,String nome, String email) {
+    public Professor(int id,String nomeP, String email) {
         this.nomeP = nomeP;
         this.id = id;
         this.email = email;

@@ -69,11 +69,13 @@ public class AlunoDao implements Dao<Aluno> {
 
     @Override
     public int alterar(Aluno aluno) {
-        String sqlUpdate = "UPDATE alunos SET NOME=?, EMAIL=? WHERE ID=?" + aluno.getId_aluno();
+        String sqlUpdate = "UPDATE aluno SET NOME=?, EMAIL=? WHERE ID=?";
         try {
             PreparedStatement stmt = conexao.prepareStatement(sqlUpdate);
             stmt.setString(1, aluno.getNome());
             stmt.setString(2, aluno.getEmail());
+            stmt.setInt(3, aluno.getId_aluno());
+            stmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
