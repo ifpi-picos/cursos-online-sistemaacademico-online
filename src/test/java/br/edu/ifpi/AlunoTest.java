@@ -20,7 +20,7 @@ public class AlunoTest {
         // Aluno al2 = new Aluno("Katarina", "katarina@aluno.ifpi.edu.br");
         // alunoConexao.cadastrar(al2);
 
-        alunoConexao.consultarTodos();
+        //alunoConexao.consultarTodos();
 
          Scanner scanner = new Scanner(System.in);
         // System.out.println("Digite o id do aluno");
@@ -38,14 +38,18 @@ public class AlunoTest {
 
         // alunoConexao.alterar(aluno_alter);
 
-        Aluno aluno_remover = new Aluno();
-        System.out.println("Digite o id do aluno que deseja remover: ");
-        int id_remove = scanner.nextInt();
+        // Aluno aluno_remover = new Aluno();
+        // System.out.println("Digite o id do aluno que deseja remover: ");
+        // int id_remove = scanner.nextInt();
 
-        aluno_remover.setId_aluno((id_remove));
+        // aluno_remover.setId_aluno((id_remove));
 
-        alunoConexao.remover(aluno_remover);
-        alunoConexao.consultarTodos();
+        // alunoConexao.remover(aluno_remover);
+        // alunoConexao.consultarTodos();
+
+       // alunoConexao.gerarEstaticas();
+       // alunoConexao.consultarTodos();
+       alunoConexao.visualizarCursos();
     }
 
 }

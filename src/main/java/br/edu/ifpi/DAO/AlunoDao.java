@@ -100,5 +100,35 @@ public class AlunoDao implements Dao<Aluno> {
         return 0;
     }
 
+    public void gerarEstaticas(){
+        String sqlSituacao = "UPDATE turma SET situacao = CASE WHEN nota >= 7.0 THEN 'Aprovado' ELSE 'Reprovado' END ";
+        try {
+            PreparedStatement psmt = conexao.prepareStatement(sqlSituacao);
+            psmt.executeUpdate();
+            System.out.println("situacao criada com sucesso");
+        } catch (Exception e) {
+            System.out.println("Algum erro ocorreu.");
+            e.printStackTrace();
+        }
+    }
+
+    public void visualizarCursos() {
+        String selecaoColuna = "SELECT curso.nome AS nome_curso, aluno.nome AS nome_aluno FROM curso INNER JOIN aluno ON curso.id = aluno.id";
+        try {
+            PreparedStatement stmt = conexao.prepareStatement(selecaoColuna);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                System.out.println("Nome do Aluno: " + rs.getString("nome_aluno") + "\tNome Curso: "
+                        + rs.getString("nome_curso") );
+            }
+            rs.close();
+            stmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
 
 }
