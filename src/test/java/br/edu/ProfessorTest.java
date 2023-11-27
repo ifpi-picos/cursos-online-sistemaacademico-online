@@ -7,7 +7,9 @@ import br.edu.ifpi.DAO.AutenticacaoDao;
 import br.edu.ifpi.DAO.Conexacao;
 import br.edu.ifpi.DAO.ProfessorDao;
 import br.edu.ifpi.entidades.Aluno;
+import br.edu.ifpi.entidades.Curso;
 import br.edu.ifpi.entidades.Professor;
+import br.edu.ifpi.enums.StatusCurso;
 
 
 public class ProfessorTest {
@@ -18,12 +20,12 @@ public class ProfessorTest {
                 ProfessorDao ProfessorDao = new ProfessorDao(conexao);
                   AutenticacaoDao autentificacaodao= new AutenticacaoDao(conexao);
                 //consultar toda a tabela(id,professor,email)
-                Professor altentica_prof= autentificacaodao.autenticarProfessor(7);
-                Aluno altentica_alu= autentificacaodao.autenticarAluno(3);
-                ProfessorDao.consultarTodos();
+                // Professor altentica_prof= autentificacaodao.autenticarProfessor(7);
+                // Aluno altentica_alu= autentificacaodao.autenticarAluno(3);
+                // ProfessorDao.consultarTodos();
 
                 //vizualizar tabela(professor e curso)
-                //ProfessorDao.visualizarProfessor();
+                ProfessorDao.visualizarProfessor();
               
                
                 Scanner scan = new Scanner(System.in);
@@ -49,16 +51,17 @@ public class ProfessorTest {
 
                 //tabela já atualizada
 
-                System.out.println(" Digite o id do professor que deseja remover: ");
-                int Id_remov = scan.nextInt();
+                // System.out.println(" Digite o id do professor que deseja remover: ");
+                // int Id_remov = scan.nextInt();
                 
 
-                Professor prof_remov= new Professor();
-                prof_remov.setId((Id_remov));
+                // Professor prof_remov= new Professor();
+                // prof_remov.setId((Id_remov));
 
-                //remover professor 
-                ProfessorDao.remover(prof_remov);
-
+                // //remover professor 
+                // ProfessorDao.remover(prof_remov);
+                Curso cursinho= new Curso(0, "Engenharia de Software", 60, 1, StatusCurso.ABERTO);
+                ProfessorDao.cadastrarCurso(cursinho);
                 ProfessorDao.consultarTodos();
         }
 }

@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import br.edu.ifpi.entidades.Curso;
 import br.edu.ifpi.entidades.Professor;
 
 public class ProfessorDao implements Dao<Professor> {
@@ -127,5 +128,26 @@ public class ProfessorDao implements Dao<Professor> {
         }
         return 0;
     }
+
+    public int cadastrarCurso(Curso curso) {
+          String SQL_INSERT = "INSERT INTO curso (nome, status, cargahoraria, id_professor) VALUES(?,?,?,?)";
+
+        try{
+            PreparedStatement stmt =  conexao.prepareStatement(SQL_INSERT);
+            stmt.setString(1, curso.getNomeC());
+            stmt.setInt(3, curso.getCargahoraria());
+            stmt.setInt(4, curso.getProf_id());
+            stmt.setString(2, curso.getStatus().name());
+            int row = stmt.executeUpdate();
+
+            System.out.println(row);
+            return row;
+        }catch (SQLException e){
+            System.err.format("SQL State %s\n%s", e.getSQLState(), e.getMessage());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return 0;  
+      }
 
 }
