@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import br.edu.ifpi.entidades.Aluno;
 
 public class AlunoDao implements Dao<Aluno> {
@@ -69,11 +71,13 @@ public class AlunoDao implements Dao<Aluno> {
 
     @Override
     public int alterar(Aluno aluno) {
-        String sqlUpdate = "UPDATE alunos SET NOME=?, EMAIL=? WHERE ID=?" + aluno.getId_aluno();
+        String sqlUpdate = "UPDATE aluno SET NOME=?, EMAIL=? WHERE ID=?";
         try {
             PreparedStatement stmt = conexao.prepareStatement(sqlUpdate);
             stmt.setString(1, aluno.getNome());
             stmt.setString(2, aluno.getEmail());
+            stmt.setInt(3, aluno.getId_aluno());
+            stmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -82,17 +86,49 @@ public class AlunoDao implements Dao<Aluno> {
 
     @Override
     public int remover(Aluno aluno) {
-        String sqlDelete = "DELETE FROM alunos WHERE ID = ?" + aluno.getId_aluno();
+        String sqlDelete = "DELETE FROM aluno WHERE ID = ?" ;
 
         try {
 
             PreparedStatement stmt = conexao.prepareStatement(sqlDelete);
-            stmt.setInt(1, (int) aluno.getId_aluno());
+            stmt.setInt(1, aluno.getId_aluno());
             stmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao tentar remover o professor: " + e.getMessage());
         }
         return 0;
     }
+
+    public void gerarEstaticas(){
+        String sqlSituacao = "UPDATE turma SET situacao = CASE WHEN nota >= 7.0 THEN 'Aprovado' ELSE 'Reprovado' END ";
+        try {
+            PreparedStatement psmt = conexao.prepareStatement(sqlSituacao);
+            psmt.executeUpdate();
+            System.out.println("situacao criada com sucesso");
+        } catch (Exception e) {
+            System.out.println("Algum erro ocorreu.");
+            e.printStackTrace();
+        }
+    }
+
+    public void visualizarCursos() {
+        String selecaoColuna = "SELECT curso.nome AS nome_curso, aluno.nome AS nome_aluno FROM curso INNER JOIN aluno ON curso.id = aluno.id";
+        try {
+            PreparedStatement stmt = conexao.prepareStatement(selecaoColuna);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                System.out.println("Nome do Aluno: " + rs.getString("nome_aluno") + "\tNome Curso: "
+                        + rs.getString("nome_curso") );
+            }
+            rs.close();
+            stmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
 
 }
