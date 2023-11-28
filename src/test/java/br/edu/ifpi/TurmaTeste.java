@@ -3,14 +3,14 @@ import java.sql.Connection;
 import java.util.Scanner;
 
 import br.edu.ifpi.DAO.Conexacao;
-import br.edu.ifpi.DAO.TurmaDao;
-import br.edu.ifpi.entidades.Turma;
+import br.edu.ifpi.DAO.CursoAlunoDao;
+import br.edu.ifpi.entidades.CursoAluno;
 
 public class TurmaTeste {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Connection conexao = Conexacao.getConexao();
-        TurmaDao turmaDao = new TurmaDao(conexao);
+        CursoAlunoDao turmaDao = new CursoAlunoDao(conexao);
         // MÉTODO CADASTRAR
         // Turma t1 = new Turma(1,2, 9.7);
         // Turma t2 = new Turma(5,3, 3.4);

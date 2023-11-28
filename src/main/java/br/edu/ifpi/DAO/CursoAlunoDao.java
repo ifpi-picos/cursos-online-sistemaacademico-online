@@ -6,17 +6,17 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.edu.ifpi.entidades.Turma;
+import br.edu.ifpi.entidades.CursoAluno;
 
-public class TurmaDao implements Dao<Turma>{
+public class CursoAlunoDao implements Dao<CursoAluno>{
     private Connection conexao;
     
-    public TurmaDao(Connection conexao) {
+    public CursoAlunoDao(Connection conexao) {
         this.conexao = conexao;
     }
     
     @Override
-    public int cadastrar(Turma turma) {
+    public int cadastrar(CursoAluno turma) {
         String addturma = "INSERT INTO turma (id_curso, id_aluno, nota) VALUES(?,?,?)";
         try {
             PreparedStatement psmt = conexao.prepareStatement(addturma);
@@ -31,22 +31,22 @@ public class TurmaDao implements Dao<Turma>{
     }
 
     @Override
-    public List<Turma> consultarTodos() {
-        List<Turma> turmas = new ArrayList<>();
+    public List<CursoAluno> consultarTodos() {
+        List<CursoAluno> turmas = new ArrayList<>();
         String sqlSelect = "SELECT * FROM turma";
         try {
             PreparedStatement stmt = conexao.prepareStatement(sqlSelect);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()){
-                Turma turma = new Turma();
+                CursoAluno turma = new CursoAluno();
                 turma.setId_curso(rs.getInt("id_curso"));
                 turma.setId_aluno(rs.getInt("id_aluno"));
                 turma.setNota(rs.getDouble("nota"));
                 turmas.add(turma);
             }
 
-            for (Turma t : turmas){
+            for (CursoAluno t : turmas){
                 System.out.println("id_aluna : " + t.getId_aluno() + "\t Nota: " + t.getNota() + "\t id_curso :" + t.getId_curso());
             }
             rs.close();
@@ -58,7 +58,7 @@ public class TurmaDao implements Dao<Turma>{
     }
 
     @Override
-    public int alterar(Turma turma) {
+    public int alterar(CursoAluno turma) {
         String sqlUpdate = "UPDATE turma SET nota=? WHERE id_aluno=?";
         try {
             PreparedStatement stmt = conexao.prepareStatement(sqlUpdate);
@@ -76,7 +76,7 @@ public class TurmaDao implements Dao<Turma>{
     }
     
     @Override
-    public int remover(Turma turma) {
+    public int remover(CursoAluno turma) {
         String sqlDelete = "DELETE FROM turma WHERE Id_aluno = ?";
         
         try {

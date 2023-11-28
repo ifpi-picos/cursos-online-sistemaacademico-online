@@ -1,16 +1,16 @@
 package br.edu.ifpi.entidades;
 
-public class Turma {
+public class CursoAluno {
     // private int id_turma;
     private int id_curso;
     private int id_aluno;
     private double nota;
     
     
-    public Turma() {
+    public CursoAluno() {
     }
     
-    public Turma(int id_curso, int id_aluno, double nota) {
+    public CursoAluno(int id_curso, int id_aluno, double nota) {
         // this.id_turma = id_turma;
         this.id_curso = id_curso;
         this.id_aluno = id_aluno;
