@@ -46,7 +46,7 @@ public class CursoTest {
 
         // cursodao.cadastrar(c1);
         // cursodao.cadastrar(c2);
-        cursodao.consultarTodos();
+        // cursodao.consultarTodos();
         cursodao.visualizarCursos();
 
         Scanner scanner = new Scanner(System.in);
@@ -55,27 +55,28 @@ public class CursoTest {
         // Curso cursoParaRemover = new Curso();
         // cursoParaRemover.setId(idParaRemover);
  
-        System.out.print("Digite o ID do curso a ser alterado: ");
-        int alteracao = scanner.nextInt();
+        // System.out.print("Digite o ID do curso a ser alterado: ");
+        // int alteracao = scanner.nextInt();
 
-        scanner.nextLine();
+        // scanner.nextLine();
 
-        Curso cursoalterado = new Curso();
+        // Curso cursoalterado = new Curso();
 
-        cursoalterado.setId(alteracao);
-        System.out.println("novo nome: ");
-        cursoalterado.setNome(scanner.nextLine());
+        // cursoalterado.setId(alteracao);
+        // System.out.println("novo nome: ");
+        // cursoalterado.setNome(scanner.nextLine());
 
-        System.out.println("staus do curso");
-        cursoalterado.setStatus(StatusCurso.valueOf(scanner.next()));
+        // System.out.println("staus do curso");
+        // cursoalterado.setStatus(StatusCurso.valueOf(scanner.next()));
 
-        System.out.println("nova carga horaria: ");
-        cursoalterado.setCargahoraria(scanner.nextInt());
+        // System.out.println("nova carga horaria: ");
+        // cursoalterado.setCargahoraria(scanner.nextInt());
 
-        System.out.println("novo professor: ");
-        cursoalterado.setProf_id(scanner.nextInt());
-        cursodao.alterar(cursoalterado);
+        // System.out.println("novo professor: ");
+        // cursoalterado.setProf_id(scanner.nextInt());
+        // cursodao.alterar(cursoalterado);
 
-        cursodao.consultarTodos();
-
-}}
+        System.out.println("qual o curso deseja ver as notas: ");
+        int idCurso = scanner.nextInt();
+        cursodao.calcularMedia(idCurso);
+}};

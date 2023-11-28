@@ -103,4 +103,20 @@ public class TurmaDao implements Dao<Turma>{
             e.printStackTrace();
         }
     }
+    public int exibirAlunosMatriculados(int id_curso){
+        String sqlCont = "SELECT COUNT(*) AS total_alunos FROM turma WHERE id_curso = " + id_curso;
+        try {
+            PreparedStatement stmt = conexao.prepareStatement(sqlCont);
+            ResultSet resultSet = stmt.executeQuery();
+            if (resultSet.next()) {
+                System.out.println("Total de alunos matriculados : ");
+                int total_alunos = resultSet.getInt("total_alunos");
+                System.out.println(total_alunos);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Não foi possivel retornar o numero de alunos da turma");
+        }
+        return 0;
+    }
 }
