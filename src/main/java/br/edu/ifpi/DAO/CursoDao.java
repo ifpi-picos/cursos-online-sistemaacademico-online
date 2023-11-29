@@ -122,39 +122,19 @@ public class CursoDao implements Dao<Curso>{
         }
         return 0;
     }
-    public void calcularMedia(int id_curso) {
-        String sql_selecao = "SELECT nota FROM turma WHERE id_curso = ?";
+    public int calcularMediaGeral(int id_curso){
+        String sqlAVG = "UPDATE curso SET media_geral = (SELECT AVG(nota) AS media_g FROM curso_aluno WHERE id_curso = ?) WHERE id = ?";
         try {
-            PreparedStatement stmt = conexao.prepareStatement(sql_selecao);
+            PreparedStatement stmt = conexao.prepareStatement(sqlAVG);
             stmt.setInt(1, id_curso);
-            ResultSet rs = stmt.executeQuery();
-            System.out.println("-----------Notas dos Alunos-----------");
-            int contNotas = 0;
-            double somaNotas = 0;
-            while (rs.next()) {
-                double nota = rs.getFloat("nota");
-                somaNotas += nota;
-                contNotas++;
-            }
-            double media = somaNotas / contNotas;
-            System.out.println(media);
-            System.out.println("---------------------------------------");
-            rs.close();
-            stmt.close();
-            mostrarMediaGeral(id_curso, media);
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Ops, ocorreu um erro.");
-        }
-    }
-    public void mostrarMediaGeral(int id_curso, double mediaGeral){
-        String update = "UPDATE curso SET media_geral = ? WHERE id = ?";
-        try (PreparedStatement stmt = conexao.prepareStatement(update)) {
-            stmt.setDouble(1, mediaGeral);
             stmt.setInt(2, id_curso);
-            stmt.executeUpdate();
-            System.out.println("Média-geral atualizada com sucesso para o curso " + id_curso);
-    }    catch (Exception e) {
-       e.printStackTrace();
+            int update = stmt.executeUpdate();
+            if (update > 0){ 
+                System.out.println("Média atualizada com sucesso");
+        } }catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Não foi possivel calcular a media");
+        }
+        return 0;
     }
-}}
+}
