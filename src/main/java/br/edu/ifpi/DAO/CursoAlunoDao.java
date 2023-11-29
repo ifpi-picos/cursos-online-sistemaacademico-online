@@ -33,7 +33,7 @@ public class CursoAlunoDao implements Dao<CursoAluno>{
     @Override
     public List<CursoAluno> consultarTodos() {
         List<CursoAluno> turmas = new ArrayList<>();
-        String sqlSelect = "SELECT * FROM turma";
+        String sqlSelect = "SELECT * FROM curso_aluno";
         try {
             PreparedStatement stmt = conexao.prepareStatement(sqlSelect);
             ResultSet rs = stmt.executeQuery();
@@ -59,7 +59,7 @@ public class CursoAlunoDao implements Dao<CursoAluno>{
 
     @Override
     public int alterar(CursoAluno turma) {
-        String sqlUpdate = "UPDATE turma SET nota=? WHERE id_aluno=?";
+        String sqlUpdate = "UPDATE curso_aluno SET nota=? WHERE id_aluno=?";
         try {
             PreparedStatement stmt = conexao.prepareStatement(sqlUpdate);
             // stmt.setInt(1, turma.getId_curso());
@@ -77,7 +77,7 @@ public class CursoAlunoDao implements Dao<CursoAluno>{
     
     @Override
     public int remover(CursoAluno turma) {
-        String sqlDelete = "DELETE FROM turma WHERE Id_aluno = ?";
+        String sqlDelete = "DELETE FROM curso_aluno WHERE Id_aluno = ?";
         
         try {
             PreparedStatement stmt = conexao.prepareStatement(sqlDelete);
@@ -92,8 +92,8 @@ public class CursoAlunoDao implements Dao<CursoAluno>{
         return 0;
     }
 
-    public void gerarEstaticas(){
-        String sqlSituacao = "UPDATE turma SET situacao = CASE WHEN nota >= 7.0 THEN 'Aprovado' ELSE 'Reprovado' END ";
+    public void gerarSituacao(){
+        String sqlSituacao = "UPDATE curso_aluno SET situacao = CASE WHEN nota >= 7.0 THEN 'Aprovado' ELSE 'Reprovado' END ";
         try {
             PreparedStatement psmt = conexao.prepareStatement(sqlSituacao);
             psmt.executeUpdate();

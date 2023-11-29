@@ -137,4 +137,19 @@ public class CursoDao implements Dao<Curso>{
         }
         return 0;
     }
+    public void exibirAproveitamentoCurso(){
+        String sqlClausa = "UPDATE curso SET aproveitamento = (SELECT TO_CHAR(SUM(CASE WHEN situacao = 'Aprovado' THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 'FM9999.99') || '%' " +
+                "FROM curso_aluno WHERE id_curso = curso.id)";
+        try {
+            PreparedStatement stmt = conexao.prepareStatement(sqlClausa);
+            int update = stmt.executeUpdate();
+            if (update > 0){
+                System.out.println("Aproveitamento realizado!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Não foi possível realizar o aproveitamento do curso.");
+        }
+    }
+    
 }

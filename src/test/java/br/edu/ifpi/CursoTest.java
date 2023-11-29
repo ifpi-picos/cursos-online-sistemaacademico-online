@@ -76,7 +76,8 @@ public class CursoTest {
         // cursoalterado.setProf_id(scanner.nextInt());
         // cursodao.alterar(cursoalterado);
 
-        System.out.println("qual o curso deseja atualizar a media?  ");
-        int idCurso = scanner.nextInt();
-        cursodao.calcularMediaGeral(idCurso);
+        // System.out.println("qual o curso deseja atualizar a media?  ");
+        // int idCurso = scanner.nextInt();
+        // cursodao.calcularMediaGeral(idCurso);
+        cursodao.exibirAproveitamentoCurso();
 }};
