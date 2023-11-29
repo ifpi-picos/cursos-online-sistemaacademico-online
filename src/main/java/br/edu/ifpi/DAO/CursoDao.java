@@ -10,6 +10,8 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import org.xml.sax.SAXException;
+
 import br.edu.ifpi.entidades.Curso;
 import br.edu.ifpi.enums.StatusCurso;
 
@@ -149,6 +151,22 @@ public class CursoDao implements Dao<Curso>{
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Não foi possível realizar o aproveitamento do curso.");
+        }
+    }
+    public void mostrarAproveitamento(){
+        String select = "SELECT id, nome, aproveitamento FROM curso order by id asc";
+        try {
+            PreparedStatement stmt = conexao.prepareStatement(select);
+            ResultSet rs = stmt.executeQuery();
+            System.out.printf("%-4s | %-30s | %-7s\n", "ID", "Nome do Curso", "Aproveitamento");
+            while (rs.next()) {
+                System.out.printf("%-4d | %-30s | %-7s\n", rs.getInt("id"), rs.getString("nome"), rs.getString("aproveitamento"));
+            }
+            rs.close();
+            stmt.close();
+        } catch (Exception e) {
+          e.printStackTrace();
+          System.out.println("deu um erro!");
         }
     }
     

@@ -79,5 +79,6 @@ public class CursoTest {
         // System.out.println("qual o curso deseja atualizar a media?  ");
         // int idCurso = scanner.nextInt();
         // cursodao.calcularMediaGeral(idCurso);
-        cursodao.exibirAproveitamentoCurso();
+        // cursodao.exibirAproveitamentoCurso();
+        cursodao.mostrarAproveitamento();
 }};
