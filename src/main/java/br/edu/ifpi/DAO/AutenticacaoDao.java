@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.naming.spi.DirStateFactory.Result;
+import javax.swing.JOptionPane;
 
 import br.edu.ifpi.entidades.Aluno;
 import br.edu.ifpi.entidades.Curso;
@@ -18,7 +19,7 @@ public class AutenticacaoDao {
         this.conexao = conexao;
     }
 
-    public Aluno autenticarAluno(int id ) {
+    public Aluno autenticarAluno(int id) {
         String sql = "SELECT * FROM aluno WHERE id = ?";
 
         try {
@@ -30,20 +31,21 @@ public class AutenticacaoDao {
                 int id_a = resultSet.getInt("id");
                 String nome_a = resultSet.getString("nome");
                 String email_a = resultSet.getString("email");
-                System.out.println("bem vindo ao sistema academico Aluno " + nome_a);
+        JOptionPane.showMessageDialog(null, "Bem vindo ao Sistema Academico " + nome_a +" !", "Deu certo, boy!", JOptionPane.INFORMATION_MESSAGE);
 
-                return new Aluno( id_a,nome_a,email_a);
+                return new Aluno(id_a, nome_a, email_a);
             }
-        
+
         } catch (Exception e) {
             e.printStackTrace();
 
         }
+               JOptionPane.showMessageDialog(null,"Aluno não encontrado!","Não deu certo não, boy!", JOptionPane.ERROR_MESSAGE);
 
-        System.out.println("Aluno não encontrado!");
         return null;
     }
-   public Professor autenticarProfessor(int id ) {
+
+    public Professor autenticarProfessor(int id) {
         String SQLP = "SELECT * FROM professor WHERE id = ?";
 
         try {
@@ -55,18 +57,18 @@ public class AutenticacaoDao {
                 int id_p = resultSet.getInt("id");
                 String nome_p = resultSet.getString("nome");
                 String email_p = resultSet.getString("email");
-                System.out.println("bem vindo ao sistema academico Professor " + nome_p);
+        JOptionPane.showMessageDialog(null, "Bem vindo ao Sistema Academico " + nome_p +" !", "Deu certo, boy!", JOptionPane.INFORMATION_MESSAGE);
 
-                return new Professor( id_p,nome_p,email_p);
+                return new Professor(id_p, nome_p, email_p);
 
             }
-        
+
         } catch (Exception e) {
             e.printStackTrace();
-
+ 
         }
 
-        System.out.println("Professor não encontrado!");
+       JOptionPane.showMessageDialog(null,"Professor não encontrado!","Não deu certo não, boy!", JOptionPane.ERROR_MESSAGE);
         return null;
-    } 
+    }
 }

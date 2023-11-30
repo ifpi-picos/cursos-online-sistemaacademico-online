@@ -1,4 +1,4 @@
-package br.edu;
+package br.edu.ifpi;
 
 import java.sql.Connection;
 import java.util.Scanner;
@@ -14,30 +14,37 @@ import br.edu.ifpi.enums.StatusCurso;
 
 public class ProfessorTest {
         public static void main(String[] args) {
-                //conexão com banco de dados
+                //CONEXÃO COM BANCO DE DADOS
                 Connection conexao = Conexacao.getConexao();
-               
-                ProfessorDao ProfessorDao = new ProfessorDao(conexao);
-                  AutenticacaoDao autentificacaodao= new AutenticacaoDao(conexao);
-                //consultar toda a tabela(id,professor,email)
-                // Professor altentica_prof= autentificacaodao.autenticarProfessor(7);
-                // Aluno altentica_alu= autentificacaodao.autenticarAluno(3);
-                // ProfessorDao.consultarTodos();
 
-                //vizualizar tabela(professor e curso)
-                ProfessorDao.visualizarProfessor();
+                ProfessorDao ProfessorDao = new ProfessorDao(conexao);
+
+//AUTENFIFICAÇÃO DO PROFESSOR 
+
+                AutenticacaoDao autentificacaodao= new AutenticacaoDao(conexao);
+
+                Professor altentica_prof= autentificacaodao.autenticarProfessor(89);
+//CONSULTAR TODA TABELA
+
+                 ProfessorDao.consultarTodos();
+
+                //VIZUALIZAR PROFESSORES E CURSOS 
+
+            ProfessorDao.visualizarProfessor();
               
                
                 Scanner scan = new Scanner(System.in);
 
-                //entrada de dados
+                //ENTRADA DO ID PARA ALTERAÇÃO
+
                 // System.out.println(" Digite o id do professor que deseja alterar: ");
                 // int Id_alter = scan.nextInt();
                 // scan.nextLine();
 
                 // Professor prof_alter = new Professor();
 
-                // //pelo id alterar nome e email
+                // ALTERAR PELO ID COLETADO
+
                 // prof_alter.setId(Id_alter);
 
                 // System.out.println("Novo Nome: ");
@@ -46,10 +53,11 @@ public class ProfessorTest {
                 // System.out.println("Novo Email: ");
                 // prof_alter.setEmail(scan.next());
 
-                // //alterar professor 
+                // ALTERAR PROFESSOR SELECIONADO 
+
                 // ProfessorDao.alterar(prof_alter);
 
-                //tabela já atualizada
+                // ENTRADA DE ID PARA REMOÇÃO 
 
                 // System.out.println(" Digite o id do professor que deseja remover: ");
                 // int Id_remov = scan.nextInt();
@@ -58,10 +66,19 @@ public class ProfessorTest {
                 // Professor prof_remov= new Professor();
                 // prof_remov.setId((Id_remov));
 
-                // //remover professor 
+                // REMOVE PROFESSOR SELECIONADO 
+
                 // ProfessorDao.remover(prof_remov);
-                Curso cursinho= new Curso(0, "Engenharia de Software", 60, 1, StatusCurso.ABERTO);
-                ProfessorDao.cadastrarCurso(cursinho);
-                ProfessorDao.consultarTodos();
+
+                // INSTANCIA NOVO CURSO 
+                 Curso cursinho= new Curso(0, "Engenharia de Software", 60, 1, StatusCurso.ABERTO);
+                
+                 //CADASTRA NOVO CURSO 
+
+                 // ProfessorDao.cadastrarCurso(cursinho);
+
+                 //VOLTA A MOSTRAR TABELA COMPLETA 
+
+                // ProfessorDao.consultarTodos();
         }
 }

@@ -14,7 +14,7 @@ public class AlunoTest {
         Connection conexao = Conexacao.getConexao();
         AlunoDao alunoConexao = new AlunoDao(conexao);
         AutenticacaoDao autentificacaodao = new AutenticacaoDao(conexao);
-        Aluno altentica_alu = autentificacaodao.autenticarAluno(3);
+        Aluno altentica_alu = autentificacaodao.autenticarAluno(1);
         // Aluno aluno1 = new Aluno("samya", "sam@aluno.ifpi.edu.br");
         // alunoConexao.cadastrar(aluno1);
         // Aluno al2 = new Aluno("Katarina", "katarina@aluno.ifpi.edu.br");
