@@ -16,27 +16,26 @@ public class TurmaTeste {
         // Turma t2 = new Turma(1,1, 8);
         // turmaDao.cadastrar(t2);
         turmaDao.consultarTodos();
-        turmaDao.gerarEstaticas();
 
         // MÉTODO ALTERAR NOTA PELO ID DO ALUNO
-        // System.out.print("Digite o ID do aluno a ser alterado: ");
-        // int alteracao = scanner.nextInt();
+        System.out.print("Digite o ID do aluno a ser alterado: ");
+        int alteracao = scanner.nextInt();
 
-        // scanner.nextLine();
+        scanner.nextLine();
 
-        // Turma turmaalterado = new Turma();
+        CursoAluno turmaalterado = new CursoAluno();
 
-        // turmaalterado.setId_aluno(alteracao);
+        turmaalterado.setId_aluno(alteracao);
 
-        // System.out.println("novo id do aluno: ");
-        // turmaalterado.setId_aluno(scanner.nextInt());
+        System.out.println("novo id do aluno: ");
+        turmaalterado.setId_aluno(scanner.nextInt());
 
-        // System.out.println("novo id curso: ");
-        // turmaalterado.setId_curso(scanner.nextInt());
+        System.out.println("novo id curso: ");
+        turmaalterado.setId_curso(scanner.nextInt());
 
-        // System.out.println("nova nota: ");
-        // turmaalterado.setNota(scanner.nextDouble());
-        // turmaDao.alterar(turmaalterado);
+        System.out.println("nova nota: ");
+        turmaalterado.setNota(scanner.nextDouble());
+        turmaDao.alterar(turmaalterado);
 
         // MÉTODO REMOVER 
         //   System.out.print("Digite o ID do aluno a ser removido da turma: ");
@@ -49,5 +48,7 @@ public class TurmaTeste {
         //    System.out.print("digite o  id do curso para saber a quantidade de alunos: ");
         //    int qtd = scanner.nextInt();
         //    cursodao.exibirAlunosMatriculados(qtd);
+
+        turmaDao.gerarSituacao();
         }
 }

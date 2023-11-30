@@ -10,6 +10,8 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import org.xml.sax.SAXException;
+
 import br.edu.ifpi.entidades.Curso;
 import br.edu.ifpi.enums.StatusCurso;
 
@@ -122,39 +124,50 @@ public class CursoDao implements Dao<Curso>{
         }
         return 0;
     }
-    public void calcularMedia(int id_curso) {
-        String sql_selecao = "SELECT nota FROM turma WHERE id_curso = ?";
+    public int calcularMediaGeral(int id_curso){
+        String sqlAVG = "UPDATE curso SET media_geral = (SELECT AVG(nota) AS media_g FROM curso_aluno WHERE id_curso = ?) WHERE id = ?";
         try {
-            PreparedStatement stmt = conexao.prepareStatement(sql_selecao);
+            PreparedStatement stmt = conexao.prepareStatement(sqlAVG);
             stmt.setInt(1, id_curso);
-            ResultSet rs = stmt.executeQuery();
-            System.out.println("-----------Notas dos Alunos-----------");
-            int contNotas = 0;
-            double somaNotas = 0;
-            while (rs.next()) {
-                double nota = rs.getFloat("nota");
-                somaNotas += nota;
-                contNotas++;
+            stmt.setInt(2, id_curso);
+            int update = stmt.executeUpdate();
+            if (update > 0){ 
+                System.out.println("Média atualizada com sucesso");
+        } }catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Não foi possivel calcular a media");
+        }
+        return 0;
+    }
+    public void exibirAproveitamentoCurso(){
+        String sqlClausa = "UPDATE curso SET aproveitamento = (SELECT TO_CHAR(SUM(CASE WHEN situacao = 'Aprovado' THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 'FM9999.99') || '%' " +
+                "FROM curso_aluno WHERE id_curso = curso.id)";
+        try {
+            PreparedStatement stmt = conexao.prepareStatement(sqlClausa);
+            int update = stmt.executeUpdate();
+            if (update > 0){
+                System.out.println("Aproveitamento realizado!");
             }
-            double media = somaNotas / contNotas;
-            System.out.println(media);
-            System.out.println("---------------------------------------");
-            rs.close();
-            stmt.close();
-            mostrarMediaGeral(id_curso, media);
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("Ops, ocorreu um erro.");
+            System.out.println("Não foi possível realizar o aproveitamento do curso.");
         }
     }
-    public void mostrarMediaGeral(int id_curso, double mediaGeral){
-        String update = "UPDATE curso SET media_geral = ? WHERE id = ?";
-        try (PreparedStatement stmt = conexao.prepareStatement(update)) {
-            stmt.setDouble(1, mediaGeral);
-            stmt.setInt(2, id_curso);
-            stmt.executeUpdate();
-            System.out.println("Média-geral atualizada com sucesso para o curso " + id_curso);
-    }    catch (Exception e) {
-       e.printStackTrace();
+    public void mostrarAproveitamento(){
+        String select = "SELECT id, nome, aproveitamento FROM curso order by id asc";
+        try {
+            PreparedStatement stmt = conexao.prepareStatement(select);
+            ResultSet rs = stmt.executeQuery();
+            System.out.printf("%-4s | %-30s | %-7s\n", "ID", "Nome do Curso", "Aproveitamento");
+            while (rs.next()) {
+                System.out.printf("%-4d | %-30s | %-7s\n", rs.getInt("id"), rs.getString("nome"), rs.getString("aproveitamento"));
+            }
+            rs.close();
+            stmt.close();
+        } catch (Exception e) {
+          e.printStackTrace();
+          System.out.println("deu um erro!");
+        }
     }
-}}
+    
+}
