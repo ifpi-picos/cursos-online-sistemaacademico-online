@@ -96,6 +96,8 @@ public class ProfessorDao implements Dao<Professor> {
     // -----------------------------------------ALTERAR------------------------------------------
     @Override
     public int alterar(Professor professor) {
+   
+        consultarTodos();
 
         String modificacao = "UPDATE professor SET NOME=?, EMAIL=? WHERE ID=?";
 
