@@ -10,6 +10,9 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import br.edu.ifpi.entidades.Aluno;
+import br.edu.ifpi.entidades.Curso;
+import br.edu.ifpi.entidades.CursoAluno;
+import br.edu.ifpi.enums.StatusCurso;
 
 public class AlunoDao implements Dao<Aluno> {
     private Connection conexao;
@@ -86,7 +89,7 @@ public class AlunoDao implements Dao<Aluno> {
 
     @Override
     public int remover(Aluno aluno) {
-        String sqlDelete = "DELETE FROM aluno WHERE ID = ?" ;
+        String sqlDelete = "DELETE FROM aluno WHERE ID = ?";
 
         try {
 
@@ -100,7 +103,7 @@ public class AlunoDao implements Dao<Aluno> {
         return 0;
     }
 
-    public void gerarEstaticas(){
+    public void gerarEstaticas() {
         String sqlSituacao = "UPDATE turma SET situacao = CASE WHEN nota >= 7.0 THEN 'Aprovado' ELSE 'Reprovado' END ";
         try {
             PreparedStatement psmt = conexao.prepareStatement(sqlSituacao);
@@ -112,14 +115,15 @@ public class AlunoDao implements Dao<Aluno> {
         }
     }
 
-    public void visualizarCursos() {
-        String selecaoColuna = "SELECT curso.nome AS nome_curso, aluno.nome AS nome_aluno FROM curso INNER JOIN aluno ON curso.id = aluno.id";
+    public void visualizar() {
+        String selecaoColuna = "SELECT id, nome FROM aluno where email= ?";
         try {
             PreparedStatement stmt = conexao.prepareStatement(selecaoColuna);
             ResultSet rs = stmt.executeQuery();
+
             while (rs.next()) {
                 System.out.println("Nome do Aluno: " + rs.getString("nome_aluno") + "\tNome Curso: "
-                        + rs.getString("nome_curso") );
+                        + rs.getString("nome_curso"));
             }
             rs.close();
             stmt.close();
@@ -128,7 +132,29 @@ public class AlunoDao implements Dao<Aluno> {
         }
     }
 
-
-
-
-}
+    public List<Curso> exibirCursosMatriculados(int id_al) {
+        ResultSet rs = null;
+        List<Curso> cursosMatriculados = new ArrayList<>();
+        String sqlMatriculados = "SELECT aluno.nome , curso.nome as name " +
+                "FROM aluno " +
+                "JOIN curso_aluno ON aluno.id = curso_aluno.id_aluno " +
+                "JOIN curso ON curso_aluno.id_curso = curso.id " +
+                "WHERE aluno.id = ?";
+        try {
+            PreparedStatement stmt = conexao.prepareStatement(sqlMatriculados);
+            stmt.setInt(1, id_al);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                System.out.print(rs.getString("nome" ));
+                System.out.println(rs.getString("name"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        // for (Curso curso : cursosMatriculados) {
+        //     System.out.println("   - " + curso.getNomeC());
+        // }
+        return cursosMatriculados;
+    }
+    }
