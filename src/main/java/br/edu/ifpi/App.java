@@ -27,79 +27,96 @@ public class App {
                 opcoes,
                 opcoes[0]);
 
+        boolean aux = true;
         if (escolha == 0) {
 
             String input = JOptionPane.showInputDialog("Digite um seu id :");
             int numero = Integer.parseInt(input);
             autentificacaodao.autenticarProfessor(numero);
+            while (aux) {
+                String entrada = JOptionPane.showInputDialog(null,
+                        "1º cadastrar;\n2ª consultar \n3º vizualizar professores  \n4ª alterar \n5ª remover \n6 ª remover curso \n7ª sair \n DIGITE UMA OPÇÃO:",
+                        " Menu", JOptionPane.QUESTION_MESSAGE);
 
-            String entrada = JOptionPane.showInputDialog(null,
-                    "1º cadastrar;\n2ª consultar \n3º vizualizar professores  \n4ª alterar \n5ª remover \n6 ª remover curso \n7ª sair \n DIGITE UMA OPÇÃO:",
-                    " Menu", JOptionPane.QUESTION_MESSAGE);
+                int opcao = Integer.parseInt(entrada);
 
-            int opcao = Integer.parseInt(entrada);
+                switch (opcao) {
 
-            switch (opcao) {
+                    case 1:
 
-                case 1:
+                        String nome = JOptionPane.showInputDialog("Digite seu nome:");
+                        String email = JOptionPane.showInputDialog("Digite um seu email :");
 
-                    String nome = JOptionPane.showInputDialog("Digite seu nome:");
-                    String email = JOptionPane.showInputDialog("Digite um seu email :");
+                        Professor cadastrado = new Professor(nome, email);
+                        ProfessorDao.cadastrar(cadastrado);
+                        JOptionPane.showMessageDialog(null, "O professor foi cadastrado com sucesso! ");
 
-                    Professor cadastrado = new Professor(nome, email);
-                    ProfessorDao.cadastrar(cadastrado);
-                    JOptionPane.showMessageDialog(null, "O professor foi cadastrado com sucesso! ");
+                        break;
 
-                    break;
+                    case 2:
 
-                case 2:
+                        System.out.println("-----------------------------------------------------");
+                        ProfessorDao.consultarTodos();
+                        System.out.println("-----------------------------------------------------");
 
-                    System.out.println("-----------------------------------------------------");
-                    ProfessorDao.consultarTodos();
-                    System.out.println("-----------------------------------------------------");
+                        break;
+                    case 3:
 
-                    break;
-                case 3:
+                        System.out.println("-----------------------------------------------------");
+                        ProfessorDao.visualizarProfessor();
+                        System.out.println("-----------------------------------------------------");
 
-                    System.out.println("-----------------------------------------------------");
-                    ProfessorDao.visualizarProfessor();
-                    System.out.println("-----------------------------------------------------");
+                        break;
 
-                    break;
+                    case 4:
 
-                case 4:
+                        System.out.println("-----------------------------------------------------");
+                        ProfessorDao.consultarTodos();
+                        System.out.println("-----------------------------------------------------");
 
-                    System.out.println("-----------------------------------------------------");
-                    ProfessorDao.consultarTodos();
-                    System.out.println("-----------------------------------------------------");
+                        String id_alter = JOptionPane.showInputDialog("Digite o id que vc desenja alterar: ");
+                        int alter_id = Integer.parseInt(id_alter);
 
-                    String id_alter = JOptionPane.showInputDialog("Digite o id que vc desenja alterar: ");
-                    int alter_id = Integer.parseInt(id_alter);
+                        String nome_alter = JOptionPane.showInputDialog("Digite seu nome:");
+                        String email_alter = JOptionPane.showInputDialog("Digite um seu email :");
+                        Professor prof_alter = new Professor(nome_alter, email_alter);
+                        prof_alter.setId(alter_id);
+                        ProfessorDao.alterar(prof_alter);
 
-                    String nome_alter = JOptionPane.showInputDialog("Digite seu nome:");
-                    String email_alter = JOptionPane.showInputDialog("Digite um seu email :");
-                    Professor prof_alter = new Professor(nome_alter, email_alter);
-                    prof_alter.setId(id_alter);
-                    ProfessorDao.alterar(prof_alter);
+                        System.out.println("-----------------------------------------------------");
+                        ProfessorDao.consultarTodos();
+                        System.out.println("-----------------------------------------------------");
 
-                    System.out.println("-----------------------------------------------------");
-                    ProfessorDao.consultarTodos();
-                    System.out.println("-----------------------------------------------------");
+                        break;
+                    case 5:
+                        System.out.println("-----------------------------------------------------");
+                        ProfessorDao.consultarTodos();
+                        System.out.println("-----------------------------------------------------");
 
-                    break;
-                case 5:
+                        String id_remov = JOptionPane.showInputDialog("Digite o id que vc desenja alterar: ");
+                        int remov_id = Integer.parseInt(id_remov);
 
-                    break;
-                case 6:
-                    break;
-                case 7:
-                    JOptionPane.showMessageDialog(null, "saindo do sistema ! ");
+                        Professor prof_remov = new Professor();
+                        prof_remov.setId(remov_id);
+                        ProfessorDao.remover(prof_remov);
 
-                    break;
-                default:
-                    JOptionPane.showMessageDialog(null, "não possui essa opção ! ");
+                        System.out.println("-----------------------------------------------------");
+                        ProfessorDao.consultarTodos();
+                        System.out.println("-----------------------------------------------------");
 
-                    break;
+                        break;
+                    case 6:
+                        break;
+                    case 7:
+
+                        JOptionPane.showMessageDialog(null, "saindo do sistema ! ");
+                        aux = false;
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(null, "não possui essa opção ! ");
+
+                        break;
+                }
             }
 
         } else if (escolha == 1) {
