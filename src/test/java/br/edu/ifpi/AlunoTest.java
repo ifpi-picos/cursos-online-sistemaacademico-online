@@ -50,12 +50,17 @@ public class AlunoTest {
        // alunoConexao.gerarEstaticas();
        // alunoConexao.consultarTodos();
       // alunoConexao.visualizar();
-      System.out.println("Digite o id do aluno");
-        int Id_al = scanner.nextInt();
-        scanner.nextLine();
-      Aluno aluno_alter = new Aluno();
-        aluno_alter.setId_aluno(Id_al);
-       alunoConexao.exibirCursosMatriculados(Id_al);
+
+      
+      // System.out.println("Digite o id do aluno");
+      //   int Id_al = scanner.nextInt();
+      //   scanner.nextLine();
+      // Aluno aluno_alter = new Aluno();
+      //   aluno_alter.setId_aluno(Id_al);
+      //  alunoConexao.exibirCursosMatriculados(Id_al);
+
+       alunoConexao.criarAproveitamentoCurso();
+       alunoConexao.mostrarAproveitamento();
     }
 
 }

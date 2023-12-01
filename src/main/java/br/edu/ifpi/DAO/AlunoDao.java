@@ -103,18 +103,6 @@ public class AlunoDao implements Dao<Aluno> {
         return 0;
     }
 
-    public void gerarEstaticas() {
-        String sqlSituacao = "UPDATE turma SET situacao = CASE WHEN nota >= 7.0 THEN 'Aprovado' ELSE 'Reprovado' END ";
-        try {
-            PreparedStatement psmt = conexao.prepareStatement(sqlSituacao);
-            psmt.executeUpdate();
-            System.out.println("situacao criada com sucesso");
-        } catch (Exception e) {
-            System.out.println("Algum erro ocorreu.");
-            e.printStackTrace();
-        }
-    }
-
     public void visualizar() {
         String selecaoColuna = "SELECT id, nome FROM aluno where email= ?";
         try {
@@ -145,16 +133,50 @@ public class AlunoDao implements Dao<Aluno> {
             stmt.setInt(1, id_al);
             rs = stmt.executeQuery();
             while (rs.next()) {
-                System.out.print(rs.getString("nome" ));
+                System.out.print(rs.getString("nome"));
                 System.out.println(rs.getString("name"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
-        // for (Curso curso : cursosMatriculados) {
-        //     System.out.println("   - " + curso.getNomeC());
-        // }
+
         return cursosMatriculados;
     }
+
+    public void criarAproveitamentoCurso(){
+        String sqlClausa = "UPDATE curso_aluno SET aproveitamento = nota * 10.0 WHERE id_aluno > 0 ";
+        try {
+            PreparedStatement stmt = conexao.prepareStatement(sqlClausa);
+            int update = stmt.executeUpdate();
+            if (update > 0){
+                System.out.println("Aproveitamento realizado!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Não foi possível realizar o aproveitamento do curso.");
+        }
     }
+    public void mostrarAproveitamento() {
+        String select = "SELECT aluno.nome AS nome_aluno, curso.nome AS nome_curso, curso_aluno.aproveitamento " +
+                        "FROM curso_aluno " +
+                        "JOIN aluno ON curso_aluno.id_aluno = aluno.id " +
+                        "JOIN curso ON curso_aluno.id_curso = curso.id " +
+                        "WHERE aluno.id > 0";
+        try {
+            PreparedStatement stmt = conexao.prepareStatement(select);
+            ResultSet rs = stmt.executeQuery();
+            System.out.printf("%-30s | %-30s | %-15s\n", "Nome do Aluno", "Nome do Curso", "Aproveitamento");
+            while (rs.next()) {
+                System.out.printf("%-30s | %-30s | %-15s\n", rs.getString("nome_aluno"), rs.getString("nome_curso"), rs.getString("aproveitamento"));
+            }
+            rs.close();
+            stmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Deu um erro!");
+        }
+    }
+    
+
+
+}
