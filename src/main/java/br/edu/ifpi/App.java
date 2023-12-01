@@ -9,7 +9,9 @@ import javax.swing.SwingUtilities;
 import br.edu.ifpi.DAO.AutenticacaoDao;
 import br.edu.ifpi.DAO.Conexacao;
 import br.edu.ifpi.DAO.ProfessorDao;
+import br.edu.ifpi.entidades.Curso;
 import br.edu.ifpi.entidades.Professor;
+import br.edu.ifpi.enums.StatusCurso;
 
 public class App {
     public static void main(String[] args) {
@@ -74,7 +76,8 @@ public class App {
                         ProfessorDao.consultarTodos();
                         System.out.println("-----------------------------------------------------");
 
-                        String id_alter = JOptionPane.showInputDialog("Digite o id que vc desenja alterar: ");
+                        String id_alter = JOptionPane
+                                .showInputDialog("Digite o id do professor que vc desenja alterar: ");
                         int alter_id = Integer.parseInt(id_alter);
 
                         String nome_alter = JOptionPane.showInputDialog("Digite seu nome:");
@@ -93,7 +96,8 @@ public class App {
                         ProfessorDao.consultarTodos();
                         System.out.println("-----------------------------------------------------");
 
-                        String id_remov = JOptionPane.showInputDialog("Digite o id que vc desenja alterar: ");
+                        String id_remov = JOptionPane
+                                .showInputDialog("Digite o id do professor que vc desenja remover : ");
                         int remov_id = Integer.parseInt(id_remov);
 
                         Professor prof_remov = new Professor();
@@ -106,6 +110,21 @@ public class App {
 
                         break;
                     case 6:
+
+                        String nome_curso = JOptionPane.showInputDialog("Digite seu nome do curso:");
+                        String cargacurso = JOptionPane.showInputDialog("Digite a carga horaria :");
+                        int cargahoraria = Integer.parseInt(cargacurso);
+
+                        
+                        String id_prof = JOptionPane.showInputDialog("Digite o id do professor:");
+                        int id_pro = Integer.parseInt(id_prof);
+
+                        String status = JOptionPane.showInputDialog("Digite o status do curso:");
+
+                        Curso cursinho = new Curso(0, nome_curso, cargahoraria, id_pro, StatusCurso.ABERTO);
+
+                        ProfessorDao.cadastrarCurso(cursinho);
+
                         break;
                     case 7:
 
