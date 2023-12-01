@@ -13,8 +13,8 @@ public class AlunoTest {
     public static void main(String[] args) {
         Connection conexao = Conexacao.getConexao();
         AlunoDao alunoConexao = new AlunoDao(conexao);
-        AutenticacaoDao autentificacaodao = new AutenticacaoDao(conexao);
-        Aluno altentica_alu = autentificacaodao.autenticarAluno(1);
+        // AutenticacaoDao autentificacaodao = new AutenticacaoDao(conexao);
+        // Aluno altentica_alu = autentificacaodao.autenticarAluno(2);
         // Aluno aluno1 = new Aluno("samya", "sam@aluno.ifpi.edu.br");
         // alunoConexao.cadastrar(aluno1);
         // Aluno al2 = new Aluno("Katarina", "katarina@aluno.ifpi.edu.br");
@@ -49,7 +49,13 @@ public class AlunoTest {
 
        // alunoConexao.gerarEstaticas();
        // alunoConexao.consultarTodos();
-       alunoConexao.visualizarCursos();
+      // alunoConexao.visualizar();
+      System.out.println("Digite o id do aluno");
+        int Id_al = scanner.nextInt();
+        scanner.nextLine();
+      Aluno aluno_alter = new Aluno();
+        aluno_alter.setId_aluno(Id_al);
+       alunoConexao.exibirCursosMatriculados(Id_al);
     }
 
 }

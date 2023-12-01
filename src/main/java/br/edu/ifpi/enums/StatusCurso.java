@@ -13,4 +13,8 @@ public enum StatusCurso {
 public String getDescricao() {
     return desc;
 }
+
+public static StatusCurso fromString(String statusStr) {
+    return null;
+}
 }

@@ -20,6 +20,7 @@ public class Aluno {
     
 
     public Aluno() {
+        
     }
 
     public int getId_aluno() {
